@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TheRitualRouteImport } from './routes/the-ritual'
+import { Route as TheMatRouteImport } from './routes/the-mat'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
 const TheRitualRoute = TheRitualRouteImport.update({
   id: '/the-ritual',
   path: '/the-ritual',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TheMatRoute = TheMatRouteImport.update({
+  id: '/the-mat',
+  path: '/the-mat',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -32,30 +38,34 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/the-mat': typeof TheMatRoute
   '/the-ritual': typeof TheRitualRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/the-mat': typeof TheMatRoute
   '/the-ritual': typeof TheRitualRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/the-mat': typeof TheMatRoute
   '/the-ritual': typeof TheRitualRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/the-ritual'
+  fullPaths: '/' | '/about' | '/the-mat' | '/the-ritual'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/the-ritual'
-  id: '__root__' | '/' | '/about' | '/the-ritual'
+  to: '/' | '/about' | '/the-mat' | '/the-ritual'
+  id: '__root__' | '/' | '/about' | '/the-mat' | '/the-ritual'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  TheMatRoute: typeof TheMatRoute
   TheRitualRoute: typeof TheRitualRoute
 }
 
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/the-ritual'
       fullPath: '/the-ritual'
       preLoaderRoute: typeof TheRitualRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/the-mat': {
+      id: '/the-mat'
+      path: '/the-mat'
+      fullPath: '/the-mat'
+      preLoaderRoute: typeof TheMatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  TheMatRoute: TheMatRoute,
   TheRitualRoute: TheRitualRoute,
 }
 export const routeTree = rootRouteImport
