@@ -9,8 +9,38 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TheRollerRouteImport } from './routes/the-roller'
+import { Route as TheRitualRouteImport } from './routes/the-ritual'
+import { Route as TheOilRouteImport } from './routes/the-oil'
+import { Route as TheMatRouteImport } from './routes/the-mat'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TheRollerRoute = TheRollerRouteImport.update({
+  id: '/the-roller',
+  path: '/the-roller',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TheRitualRoute = TheRitualRouteImport.update({
+  id: '/the-ritual',
+  path: '/the-ritual',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TheOilRoute = TheOilRouteImport.update({
+  id: '/the-oil',
+  path: '/the-oil',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TheMatRoute = TheMatRouteImport.update({
+  id: '/the-mat',
+  path: '/the-mat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +49,96 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/the-mat': typeof TheMatRoute
+  '/the-oil': typeof TheOilRoute
+  '/the-ritual': typeof TheRitualRoute
+  '/the-roller': typeof TheRollerRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/the-mat': typeof TheMatRoute
+  '/the-oil': typeof TheOilRoute
+  '/the-ritual': typeof TheRitualRoute
+  '/the-roller': typeof TheRollerRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/the-mat': typeof TheMatRoute
+  '/the-oil': typeof TheOilRoute
+  '/the-ritual': typeof TheRitualRoute
+  '/the-roller': typeof TheRollerRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/the-mat'
+    | '/the-oil'
+    | '/the-ritual'
+    | '/the-roller'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/about' | '/the-mat' | '/the-oil' | '/the-ritual' | '/the-roller'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/the-mat'
+    | '/the-oil'
+    | '/the-ritual'
+    | '/the-roller'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  TheMatRoute: typeof TheMatRoute
+  TheOilRoute: typeof TheOilRoute
+  TheRitualRoute: typeof TheRitualRoute
+  TheRollerRoute: typeof TheRollerRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/the-roller': {
+      id: '/the-roller'
+      path: '/the-roller'
+      fullPath: '/the-roller'
+      preLoaderRoute: typeof TheRollerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/the-ritual': {
+      id: '/the-ritual'
+      path: '/the-ritual'
+      fullPath: '/the-ritual'
+      preLoaderRoute: typeof TheRitualRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/the-oil': {
+      id: '/the-oil'
+      path: '/the-oil'
+      fullPath: '/the-oil'
+      preLoaderRoute: typeof TheOilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/the-mat': {
+      id: '/the-mat'
+      path: '/the-mat'
+      fullPath: '/the-mat'
+      preLoaderRoute: typeof TheMatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +151,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  TheMatRoute: TheMatRoute,
+  TheOilRoute: TheOilRoute,
+  TheRitualRoute: TheRitualRoute,
+  TheRollerRoute: TheRollerRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
