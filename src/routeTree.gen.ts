@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TheRollerRouteImport } from './routes/the-roller'
 import { Route as TheRitualRouteImport } from './routes/the-ritual'
+import { Route as TheOilRouteImport } from './routes/the-oil'
 import { Route as TheMatRouteImport } from './routes/the-mat'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
@@ -23,6 +24,11 @@ const TheRollerRoute = TheRollerRouteImport.update({
 const TheRitualRoute = TheRitualRouteImport.update({
   id: '/the-ritual',
   path: '/the-ritual',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TheOilRoute = TheOilRouteImport.update({
+  id: '/the-oil',
+  path: '/the-oil',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TheMatRoute = TheMatRouteImport.update({
@@ -45,6 +51,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/the-mat': typeof TheMatRoute
+  '/the-oil': typeof TheOilRoute
   '/the-ritual': typeof TheRitualRoute
   '/the-roller': typeof TheRollerRoute
 }
@@ -52,6 +59,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/the-mat': typeof TheMatRoute
+  '/the-oil': typeof TheOilRoute
   '/the-ritual': typeof TheRitualRoute
   '/the-roller': typeof TheRollerRoute
 }
@@ -60,21 +68,36 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/the-mat': typeof TheMatRoute
+  '/the-oil': typeof TheOilRoute
   '/the-ritual': typeof TheRitualRoute
   '/the-roller': typeof TheRollerRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/the-mat' | '/the-ritual' | '/the-roller'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/the-mat'
+    | '/the-oil'
+    | '/the-ritual'
+    | '/the-roller'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/the-mat' | '/the-ritual' | '/the-roller'
-  id: '__root__' | '/' | '/about' | '/the-mat' | '/the-ritual' | '/the-roller'
+  to: '/' | '/about' | '/the-mat' | '/the-oil' | '/the-ritual' | '/the-roller'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/the-mat'
+    | '/the-oil'
+    | '/the-ritual'
+    | '/the-roller'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   TheMatRoute: typeof TheMatRoute
+  TheOilRoute: typeof TheOilRoute
   TheRitualRoute: typeof TheRitualRoute
   TheRollerRoute: typeof TheRollerRoute
 }
@@ -93,6 +116,13 @@ declare module '@tanstack/react-router' {
       path: '/the-ritual'
       fullPath: '/the-ritual'
       preLoaderRoute: typeof TheRitualRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/the-oil': {
+      id: '/the-oil'
+      path: '/the-oil'
+      fullPath: '/the-oil'
+      preLoaderRoute: typeof TheOilRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/the-mat': {
@@ -123,6 +153,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   TheMatRoute: TheMatRoute,
+  TheOilRoute: TheOilRoute,
   TheRitualRoute: TheRitualRoute,
   TheRollerRoute: TheRollerRoute,
 }
