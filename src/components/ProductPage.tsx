@@ -15,6 +15,9 @@ export type ProductInfo = {
   intro: string;
   benefits: { title: string; body: string }[];
   handle: string;
+  heroImage?: string;
+  heroVideo?: string;
+  lifestyleImage?: string;
 };
 
 const moods: Record<string, { gradient: string; glow: string }> = {
@@ -85,6 +88,18 @@ export function ProductPage({ p }: { p: ProductInfo }) {
                 className="aspect-[4/5] relative overflow-hidden grain border border-border/30"
                 style={{ background: mood.gradient }}
               >
+                {p.heroVideo ? (
+                  <video
+                    src={p.heroVideo}
+                    poster={p.heroImage}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover z-[2]"
+                  />
+                ) : (
+                  <>
                 {/* Atmospheric glow */}
                 <div
                   className="absolute inset-0 pointer-events-none"
@@ -136,6 +151,8 @@ export function ProductPage({ p }: { p: ProductInfo }) {
                     background: "radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.5) 100%)",
                   }}
                 />
+                  </>
+                )}
               </div>
             </Reveal>
 
@@ -206,6 +223,17 @@ export function ProductPage({ p }: { p: ProductInfo }) {
               </Reveal>
             ))}
           </div>
+
+          {p.lifestyleImage && (
+            <Reveal>
+              <img
+                src={p.lifestyleImage}
+                alt={p.name}
+                className="mt-24 w-full block"
+                style={{ maxHeight: "580px", objectFit: "cover" }}
+              />
+            </Reveal>
+          )}
         </div>
       </main>
       <Footer />
