@@ -89,6 +89,27 @@ function Hero() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    let raf: number;
+    const tick = () => {
+      if (v.duration) {
+        const remaining = v.duration - v.currentTime;
+        if (remaining < 1.8) {
+          v.style.opacity = String(Math.max(0, remaining / 1.8));
+        } else if (v.currentTime < 1.8) {
+          v.style.opacity = String(Math.min(1, v.currentTime / 1.8));
+        } else {
+          v.style.opacity = "1";
+        }
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden grain">
       <video
@@ -99,19 +120,6 @@ function Hero() {
         playsInline
         src="/hero.mp4"
         className="absolute inset-0 w-full h-full object-cover z-0"
-        style={{ transition: "opacity 0.3s ease" }}
-        onTimeUpdate={() => {
-          const v = videoRef.current;
-          if (!v || !v.duration) return;
-          const remaining = v.duration - v.currentTime;
-          if (remaining < 1.8) {
-            v.style.opacity = String(Math.max(0, remaining / 1.8));
-          } else if (v.currentTime < 1.8) {
-            v.style.opacity = String(Math.min(1, v.currentTime / 1.8));
-          } else {
-            v.style.opacity = "1";
-          }
-        }}
       />
       <div
         className="absolute inset-0 pointer-events-none z-[1]"
