@@ -29,6 +29,7 @@ const products = [
       "Lie down. Let go. The mat's 8,820 acupressure points release tension held in the back, neck, and shoulders — activating the nervous system and flooding the body with endorphins. Ten minutes is enough to feel the shift.",
     to: "/the-mat" as const,
     handle: "acupressure-mat-sensi-massage-mat-pillow-set-applicator-for-neck-foot",
+    bg: "radial-gradient(ellipse at 30% 40%, oklch(0.32 0.06 150 / 0.95), oklch(0.14 0.02 150) 70%)",
   },
   {
     n: "02",
@@ -39,6 +40,7 @@ const products = [
       "Roll. Reduce. Reset. Cold therapy reduces morning puffiness, calms inflammation, and signals the brain to wake — without the crash that follows stimulants. The simplest tool in the ritual. Often the most addictive.",
     to: "/the-roller" as const,
     handle: "anti-ageing-treatment-for-face-and-neck-ecotools-jade-jade-set-2",
+    bg: "radial-gradient(ellipse at 70% 50%, oklch(0.40 0.04 235 / 0.9), oklch(0.16 0.02 240) 70%)",
   },
   {
     n: "03",
@@ -49,6 +51,7 @@ const products = [
       "The skin is warm from the mat, activated from the roller. Applied now, it absorbs completely. Cold-pressed botanical oil that nourishes, protects, and seals — the ritual's final act.",
     to: "/the-oil" as const,
     handle: "facial-oil-la-provencale-bio-30-ml",
+    bg: "radial-gradient(ellipse at 40% 60%, oklch(0.45 0.10 60 / 0.92), oklch(0.18 0.04 50) 70%)",
   },
 ];
 
@@ -201,7 +204,7 @@ function ProductsSection() {
 
   return (
     <section id="products" className="py-32 md:py-44 px-6 md:px-10 scroll-mt-24">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <Reveal className="text-center max-w-2xl mx-auto">
           <span className="eyebrow">The Kit</span>
           <p className="serif mt-8 text-2xl md:text-3xl leading-[1.5] text-foreground/85 italic">
@@ -209,10 +212,11 @@ function ProductsSection() {
           </p>
         </Reveal>
 
-        <div className="mt-20 grid md:grid-cols-3 gap-8">
+        <div className="mt-24 flex flex-col">
+          <div className="gold-divider" />
           {products.map((p, i) => (
-            <Reveal key={p.name} delay={i * 150}>
-              <ProductCard
+            <Reveal key={p.name} delay={i * 100}>
+              <ProductRow
                 copy={p}
                 shopify={byHandle.get(p.handle)}
                 loading={loading}
@@ -230,13 +234,14 @@ function ProductsSection() {
               />
             </Reveal>
           ))}
+          <div className="gold-divider" />
         </div>
       </div>
     </section>
   );
 }
 
-function ProductCard({
+function ProductRow({
   copy,
   shopify,
   loading,
@@ -260,55 +265,67 @@ function ProductCard({
   const price = variant?.price;
 
   return (
-    <article
-      className="group bg-card border border-border/50 h-full flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/60 overflow-hidden"
-      style={{ boxShadow: "0 0 0 rgba(201,169,110,0)" }}
-      onMouseEnter={(e) => (e.currentTarget.style.boxShadow = "0 0 30px rgba(201,169,110,0.18)")}
-      onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "0 0 0 rgba(201,169,110,0)")}
-    >
-      <Link to={copy.to} className="block aspect-[4/5] bg-background relative overflow-hidden grain border-b border-border/40">
-        {image ? (
-          <img
-            src={image.url}
-            alt={image.altText || copy.name}
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-          />
-        ) : (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="serif text-[6rem] text-primary/15 leading-none">{copy.n}</span>
-          </div>
-        )}
-      </Link>
-      <div className="p-8 md:p-10 flex flex-col flex-1">
-        <div className="serif text-4xl text-primary/30 leading-none">{copy.n}</div>
-        <div className="mt-4 eyebrow">{copy.label}</div>
-        <h3 className="serif text-3xl mt-2">{copy.name}</h3>
-        <p className="serif italic text-primary mt-2">{copy.tagline}</p>
-        <p className="mt-5 text-sm leading-[1.8] text-foreground/75 flex-1">{copy.body}</p>
-        {price && (
-          <p className="serif text-xl mt-6 text-foreground">
-            {price.currencyCode} {parseFloat(price.amount).toFixed(2)}
+    <article className="group relative overflow-hidden">
+      {/* Atmospheric background */}
+      <div
+        aria-hidden
+        className="absolute inset-0 opacity-60 transition-opacity duration-700 group-hover:opacity-90 grain"
+        style={{ background: copy.bg }}
+      />
+      {image && (
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-0 group-hover:opacity-25 transition-opacity duration-700 bg-cover bg-center"
+          style={{ backgroundImage: `url(${image.url})` }}
+        />
+      )}
+      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+
+      <div className="relative grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 items-center py-16 md:py-24 px-4 md:px-10">
+        {/* Left: number + name */}
+        <Link to={copy.to} className="md:col-span-5 block">
+          <div className="eyebrow">{copy.n} — {copy.label}</div>
+          <h3 className="serif mt-4 text-5xl md:text-7xl leading-[0.95] tracking-tight transition-colors group-hover:text-primary">
+            {copy.name}
+          </h3>
+          <p className="serif italic text-primary/90 mt-4 text-xl md:text-2xl">{copy.tagline}</p>
+        </Link>
+
+        {/* Middle: body */}
+        <div className="md:col-span-5">
+          <p className="text-foreground/75 leading-[1.9] text-base md:text-lg max-w-xl">
+            {copy.body}
           </p>
-        )}
-        <div className="mt-6 flex flex-col gap-2">
+          {price && (
+            <p className="serif text-2xl mt-6 text-foreground/90">
+              {price.currencyCode} {parseFloat(price.amount).toFixed(2)}
+            </p>
+          )}
+        </div>
+
+        {/* Right: CTA */}
+        <div className="md:col-span-2 flex md:flex-col items-start md:items-end gap-4">
           <button
             onClick={() => {
               if (!shopify || !variant) return;
               onAdd(variant.id, variant.title, variant.price, variant.selectedOptions || [], shopify);
             }}
             disabled={loading || isAdding || !variant?.availableForSale}
-            className="btn-gold w-full justify-center"
+            className="btn-gold justify-center whitespace-nowrap"
           >
             {loading || isAdding ? (
               <Loader2 className="w-4 h-4 animate-spin" />
             ) : variant && !variant.availableForSale ? (
               "Sold out"
             ) : (
-              <>Add to ritual <span>→</span></>
+              <>Add <span>→</span></>
             )}
           </button>
-          <Link to={copy.to} className="text-[0.65rem] tracking-[0.25em] uppercase text-foreground/60 hover:text-primary transition-colors text-center mt-1">
-            View details →
+          <Link
+            to={copy.to}
+            className="text-[0.65rem] tracking-[0.25em] uppercase text-foreground/60 hover:text-primary transition-colors"
+          >
+            Details →
           </Link>
         </div>
       </div>
