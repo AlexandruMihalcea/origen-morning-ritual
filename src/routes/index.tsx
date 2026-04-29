@@ -91,11 +91,19 @@ function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden grain">
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        src="/hero.mp4"
+        className="absolute inset-0 w-full h-full object-cover z-0"
+      />
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none z-[1]"
         style={{
           background:
-            "radial-gradient(ellipse at 50% 30%, oklch(0.22 0.04 150 / 0.45), transparent 60%), linear-gradient(180deg, oklch(0.13 0.01 150) 0%, var(--background) 80%)",
+            "linear-gradient(to bottom, oklch(0.16 0.005 90 / 0.55) 0%, oklch(0.16 0.005 90 / 0.3) 50%, oklch(0.16 0.005 90 / 0.7) 100%)",
         }}
       />
       <div ref={ref} className="relative z-10 px-6 md:px-10 mx-auto max-w-6xl">
