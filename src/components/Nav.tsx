@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { CartDrawer } from "./CartDrawer";
 
 export function Nav() {
   return (
@@ -21,6 +22,7 @@ export function Nav() {
           <Link to="/about" className="text-foreground/80 hover:text-primary transition-colors">
             About
           </Link>
+          <CartDrawer />
         </nav>
       </div>
     </header>

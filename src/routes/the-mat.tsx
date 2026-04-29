@@ -24,8 +24,7 @@ export const Route = createFileRoute("/the-mat")({
           { title: "Endorphin release", body: "The body responds with its own chemistry — a clean, natural lift that lasts hours after you stand up." },
           { title: "Nervous system reset", body: "Sympathetic to parasympathetic. Cortisol drops. You arrive in your body before the day asks anything of you." },
         ],
-        shopifyUrl:
-          "https://origen-8446.myshopify.com/products/acupressure-mat-sensi-massage-mat-pillow-set-applicator-for-neck-foot",
+        handle: "acupressure-mat-sensi-massage-mat-pillow-set-applicator-for-neck-foot",
       }}
     />
   ),

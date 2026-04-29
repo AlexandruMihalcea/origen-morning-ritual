@@ -24,8 +24,7 @@ export const Route = createFileRoute("/the-oil")({
           { title: "Deepest absorption", body: "Applied at the moment the skin is most receptive — warm, open, circulation activated. Two minutes is enough." },
           { title: "The seal", body: "Locks in everything the ritual created. The morning's work, protected through the rest of the day." },
         ],
-        shopifyUrl:
-          "https://origen-8446.myshopify.com/products/facial-oil-la-provencale-bio-30-ml",
+        handle: "facial-oil-la-provencale-bio-30-ml",
       }}
     />
   ),

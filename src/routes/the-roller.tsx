@@ -24,8 +24,7 @@ export const Route = createFileRoute("/the-roller")({
           { title: "De-puff & decongest", body: "Lymphatic drainage in three minutes. The mirror tells the truth: a sharper version of you, immediately." },
           { title: "Earned alertness", body: "No caffeine, no crash. The clarity is yours, generated from inside the body, not borrowed from a cup." },
         ],
-        shopifyUrl:
-          "https://origen-8446.myshopify.com/products/anti-ageing-treatment-for-face-and-neck-ecotools-jade-jade-set-2",
+        handle: "anti-ageing-treatment-for-face-and-neck-ecotools-jade-jade-set-2",
       }}
     />
   ),
