@@ -5,6 +5,7 @@ import { Footer } from "../components/Footer";
 import { Reveal } from "../components/Reveal";
 import matHero from "@/assets/mat-hero.jpg";
 import rollerHero from "@/assets/roller-hero.jpg";
+import oilHero from "@/assets/oil-hero.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -53,7 +54,7 @@ const products = [
     to: "/the-oil" as const,
     handle: "facial-oil-la-provencale-bio-30-ml",
     bg: "radial-gradient(ellipse at 40% 60%, oklch(0.45 0.10 60 / 0.92), oklch(0.18 0.04 50) 70%)",
-    image: null as string | null,
+    image: oilHero as string | null,
   },
 ];
 
