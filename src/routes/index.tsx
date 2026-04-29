@@ -5,7 +5,6 @@ import { Footer } from "../components/Footer";
 import { Reveal } from "../components/Reveal";
 import { useShopifyProducts } from "@/hooks/useShopifyProducts";
 import { useCartStore } from "@/stores/cartStore";
-import { Loader2 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
