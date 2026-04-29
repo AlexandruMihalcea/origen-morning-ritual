@@ -1,5 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ProductPage } from "../components/ProductPage";
+import rollerHero from "@/assets/roller-hero.jpg";
+import rollerVideo from "@/assets/roller-video.mp4";
+import rollerLifestyle from "@/assets/roller-lifestyle.jpg";
 
 export const Route = createFileRoute("/the-roller")({
   head: () => ({
@@ -25,6 +28,9 @@ export const Route = createFileRoute("/the-roller")({
           { title: "Earned alertness", body: "No caffeine, no crash. The clarity is yours, generated from inside the body, not borrowed from a cup." },
         ],
         handle: "anti-ageing-treatment-for-face-and-neck-ecotools-jade-jade-set-2",
+        heroImage: rollerHero,
+        heroVideo: rollerVideo,
+        lifestyleImage: rollerLifestyle,
       }}
     />
   ),
