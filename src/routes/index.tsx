@@ -3,6 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import { Nav } from "../components/Nav";
 import { Footer } from "../components/Footer";
 import { Reveal } from "../components/Reveal";
+import { useShopifyProducts } from "@/hooks/useShopifyProducts";
+import { useCartStore } from "@/stores/cartStore";
+import { Loader2 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,6 +28,7 @@ const products = [
     body:
       "Lie down. Let go. The mat's 8,820 acupressure points release tension held in the back, neck, and shoulders — activating the nervous system and flooding the body with endorphins. Ten minutes is enough to feel the shift.",
     to: "/the-mat" as const,
+    handle: "acupressure-mat-sensi-massage-mat-pillow-set-applicator-for-neck-foot",
   },
   {
     n: "02",
@@ -34,6 +38,7 @@ const products = [
     body:
       "Roll. Reduce. Reset. Cold therapy reduces morning puffiness, calms inflammation, and signals the brain to wake — without the crash that follows stimulants. The simplest tool in the ritual. Often the most addictive.",
     to: "/the-roller" as const,
+    handle: "anti-ageing-treatment-for-face-and-neck-ecotools-jade-jade-set-2",
   },
   {
     n: "03",
@@ -43,6 +48,7 @@ const products = [
     body:
       "The skin is warm from the mat, activated from the roller. Applied now, it absorbs completely. Cold-pressed botanical oil that nourishes, protects, and seals — the ritual's final act.",
     to: "/the-oil" as const,
+    handle: "facial-oil-la-provencale-bio-30-ml",
   },
 ];
 
@@ -187,6 +193,12 @@ function RitualSection() {
 }
 
 function ProductsSection() {
+  const { products: shopifyProducts, loading } = useShopifyProducts();
+  const addItem = useCartStore((s) => s.addItem);
+  const isAdding = useCartStore((s) => s.isLoading);
+
+  const byHandle = new Map(shopifyProducts.map((p) => [p.node.handle, p]));
+
   return (
     <section id="products" className="py-32 md:py-44 px-6 md:px-10 scroll-mt-24">
       <div className="mx-auto max-w-6xl">
@@ -200,29 +212,107 @@ function ProductsSection() {
         <div className="mt-20 grid md:grid-cols-3 gap-8">
           {products.map((p, i) => (
             <Reveal key={p.name} delay={i * 150}>
-              <article className="group bg-card border border-border/50 p-8 md:p-10 h-full flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/60"
-                style={{
-                  boxShadow: "0 0 0 rgba(201,169,110,0)",
+              <ProductCard
+                copy={p}
+                shopify={byHandle.get(p.handle)}
+                loading={loading}
+                onAdd={async (variantId, variantTitle, price, selectedOptions, productNode) => {
+                  await addItem({
+                    product: productNode,
+                    variantId,
+                    variantTitle,
+                    price,
+                    quantity: 1,
+                    selectedOptions,
+                  });
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.boxShadow = "0 0 30px rgba(201,169,110,0.18)")}
-                onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "0 0 0 rgba(201,169,110,0)")}
-              >
-                <div className="serif text-5xl text-primary/30 leading-none">{p.n}</div>
-                <div className="mt-6 eyebrow">{p.label}</div>
-                <h3 className="serif text-4xl mt-3">{p.name}</h3>
-                <p className="serif italic text-primary mt-2 text-lg">{p.tagline}</p>
-                <p className="mt-6 text-sm leading-[1.8] text-foreground/75 flex-1">{p.body}</p>
-                <div className="mt-8">
-                  <Link to={p.to} className="btn-gold w-full justify-center">
-                    Add to ritual <span>→</span>
-                  </Link>
-                </div>
-              </article>
+                isAdding={isAdding}
+              />
             </Reveal>
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function ProductCard({
+  copy,
+  shopify,
+  loading,
+  onAdd,
+  isAdding,
+}: {
+  copy: (typeof products)[number];
+  shopify: ReturnType<typeof useShopifyProducts>["products"][number] | undefined;
+  loading: boolean;
+  isAdding: boolean;
+  onAdd: (
+    variantId: string,
+    variantTitle: string,
+    price: { amount: string; currencyCode: string },
+    selectedOptions: Array<{ name: string; value: string }>,
+    product: NonNullable<typeof shopify>,
+  ) => Promise<void>;
+}) {
+  const variant = shopify?.node.variants.edges[0]?.node;
+  const image = shopify?.node.images.edges[0]?.node;
+  const price = variant?.price;
+
+  return (
+    <article
+      className="group bg-card border border-border/50 h-full flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/60 overflow-hidden"
+      style={{ boxShadow: "0 0 0 rgba(201,169,110,0)" }}
+      onMouseEnter={(e) => (e.currentTarget.style.boxShadow = "0 0 30px rgba(201,169,110,0.18)")}
+      onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "0 0 0 rgba(201,169,110,0)")}
+    >
+      <Link to={copy.to} className="block aspect-[4/5] bg-background relative overflow-hidden grain border-b border-border/40">
+        {image ? (
+          <img
+            src={image.url}
+            alt={image.altText || copy.name}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="serif text-[6rem] text-primary/15 leading-none">{copy.n}</span>
+          </div>
+        )}
+      </Link>
+      <div className="p-8 md:p-10 flex flex-col flex-1">
+        <div className="serif text-4xl text-primary/30 leading-none">{copy.n}</div>
+        <div className="mt-4 eyebrow">{copy.label}</div>
+        <h3 className="serif text-3xl mt-2">{copy.name}</h3>
+        <p className="serif italic text-primary mt-2">{copy.tagline}</p>
+        <p className="mt-5 text-sm leading-[1.8] text-foreground/75 flex-1">{copy.body}</p>
+        {price && (
+          <p className="serif text-xl mt-6 text-foreground">
+            {price.currencyCode} {parseFloat(price.amount).toFixed(2)}
+          </p>
+        )}
+        <div className="mt-6 flex flex-col gap-2">
+          <button
+            onClick={() => {
+              if (!shopify || !variant) return;
+              onAdd(variant.id, variant.title, variant.price, variant.selectedOptions || [], shopify);
+            }}
+            disabled={loading || isAdding || !variant?.availableForSale}
+            className="btn-gold w-full justify-center"
+          >
+            {loading || isAdding ? (
+              <Loader2 className="w-4 h-4 animate-spin" />
+            ) : variant && !variant.availableForSale ? (
+              "Sold out"
+            ) : (
+              <>Add to ritual <span>→</span></>
+            )}
+          </button>
+          <Link to={copy.to} className="text-[0.65rem] tracking-[0.25em] uppercase text-foreground/60 hover:text-primary transition-colors text-center mt-1">
+            View details →
+          </Link>
+        </div>
+      </div>
+    </article>
   );
 }
 
