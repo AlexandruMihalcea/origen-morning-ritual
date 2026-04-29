@@ -100,18 +100,15 @@ function Hero() {
         playsInline
         src="/hero.mp4"
         className="absolute inset-0 w-full h-full object-cover z-0"
-        style={{ transition: "opacity 0.1s linear" }}
-        onLoadedData={() => {
-          if (videoRef.current) videoRef.current.playbackRate = 0.6;
-        }}
+        style={{ transition: "opacity 0.3s ease" }}
         onTimeUpdate={() => {
           const v = videoRef.current;
-          if (!v) return;
+          if (!v || !v.duration) return;
           const remaining = v.duration - v.currentTime;
-          if (remaining < 1.2) {
-            v.style.opacity = String(remaining / 1.2);
-          } else if (v.currentTime < 1.2) {
-            v.style.opacity = String(v.currentTime / 1.2);
+          if (remaining < 1.8) {
+            v.style.opacity = String(Math.max(0, remaining / 1.8));
+          } else if (v.currentTime < 1.8) {
+            v.style.opacity = String(Math.min(1, v.currentTime / 1.8));
           } else {
             v.style.opacity = "1";
           }
