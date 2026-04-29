@@ -17,6 +17,29 @@ export type ProductInfo = {
   handle: string;
 };
 
+const moods: Record<string, { gradient: string; glow: string }> = {
+  "the-mat": {
+    gradient: "linear-gradient(160deg, #1a2e1a 0%, #0d1f0d 60%, #060f06 100%)",
+    glow: "radial-gradient(ellipse at 30% 25%, rgba(120, 180, 120, 0.18), transparent 60%)",
+  },
+  "the-roller": {
+    gradient: "linear-gradient(160deg, #1a2840 0%, #0d1520 60%, #060a12 100%)",
+    glow: "radial-gradient(ellipse at 70% 30%, rgba(140, 180, 230, 0.18), transparent 60%)",
+  },
+  "the-oil": {
+    gradient: "linear-gradient(160deg, #2e200f 0%, #1f150a 60%, #100a05 100%)",
+    glow: "radial-gradient(ellipse at 40% 35%, rgba(220, 170, 90, 0.20), transparent 60%)",
+  },
+};
+
+function moodFor(name: string) {
+  const key = name.toLowerCase();
+  if (key.includes("mat")) return moods["the-mat"];
+  if (key.includes("roller")) return moods["the-roller"];
+  if (key.includes("oil")) return moods["the-oil"];
+  return moods["the-mat"];
+}
+
 export function ProductPage({ p }: { p: ProductInfo }) {
   const { product, loading } = useShopifyProduct(p.handle);
   const addItem = useCartStore((s) => s.addItem);
@@ -31,6 +54,7 @@ export function ProductPage({ p }: { p: ProductInfo }) {
 
   const image = product?.node.images.edges[0]?.node;
   const price = selectedVariant?.price;
+  const mood = moodFor(p.name);
 
   const handleAdd = async () => {
     if (!product || !selectedVariant) return;
@@ -57,26 +81,59 @@ export function ProductPage({ p }: { p: ProductInfo }) {
 
           <div className="mt-12 grid md:grid-cols-2 gap-12 md:gap-20 items-start">
             <Reveal>
-              <div className="aspect-[4/5] bg-card rounded-sm relative overflow-hidden grain border border-border/40">
-                {image ? (
+              <div
+                className="aspect-[4/5] relative overflow-hidden grain border border-border/30"
+                style={{ background: mood.gradient }}
+              >
+                {/* Atmospheric glow */}
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{ background: mood.glow }}
+                />
+
+                {/* Large watermark name */}
+                <div className="absolute inset-0 flex items-end overflow-hidden pointer-events-none">
+                  <div
+                    className="serif italic leading-[0.8] whitespace-nowrap select-none"
+                    style={{
+                      fontSize: "clamp(8rem, 22vw, 18rem)",
+                      color: "rgba(245, 240, 232, 0.06)",
+                      transform: "translate(-8%, 18%)",
+                      letterSpacing: "-0.04em",
+                    }}
+                  >
+                    {p.name}
+                  </div>
+                </div>
+
+                {/* Step number top-left */}
+                <div className="absolute top-8 left-8 z-10">
+                  <div className="eyebrow text-foreground/70">Step {p.step}</div>
+                  <div className="serif text-6xl md:text-7xl text-primary/80 leading-none mt-2">
+                    {p.step}
+                  </div>
+                </div>
+
+                {/* Product image floating */}
+                {image && (
                   <img
                     src={image.url}
                     alt={image.altText || p.name}
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 m-auto w-[70%] h-[70%] object-contain z-[5]"
+                    style={{ filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.5))" }}
                   />
-                ) : (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="serif text-[8rem] md:text-[12rem] text-primary/20 leading-none">{p.step}</div>
-                      <div className="eyebrow mt-4">{p.label}</div>
-                    </div>
-                  </div>
                 )}
+
+                {/* Label bottom-right */}
+                <div className="absolute bottom-8 right-8 z-10">
+                  <div className="eyebrow text-primary">{p.label}</div>
+                </div>
+
+                {/* Vignette */}
                 <div
                   className="absolute inset-0 pointer-events-none"
                   style={{
-                    background:
-                      "radial-gradient(circle at 30% 30%, color-mix(in oklab, var(--primary) 18%, transparent), transparent 60%)",
+                    background: "radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.5) 100%)",
                   }}
                 />
               </div>
