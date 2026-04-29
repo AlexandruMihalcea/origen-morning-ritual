@@ -224,11 +224,7 @@ function RitualSection() {
 }
 
 function ProductsSection() {
-  const { products: shopifyProducts, loading } = useShopifyProducts();
-  const addItem = useCartStore((s) => s.addItem);
-  const isAdding = useCartStore((s) => s.isLoading);
-
-  const byHandle = new Map(shopifyProducts.map((p) => [p.node.handle, p]));
+  const [hovered, setHovered] = useState<number | null>(null);
 
   return (
     <section id="products" className="py-32 md:py-44 px-6 md:px-10 scroll-mt-24">
@@ -240,24 +236,15 @@ function ProductsSection() {
           </p>
         </Reveal>
 
-        <div className="mt-24 grid md:grid-cols-3 gap-8 md:gap-10">
+        <div className="mt-24 flex flex-col">
           {products.map((p, i) => (
             <Reveal key={p.name} delay={i * 100}>
               <ProductRow
                 copy={p}
-                shopify={byHandle.get(p.handle)}
-                loading={loading}
-                onAdd={async (variantId, variantTitle, price, selectedOptions, productNode) => {
-                  await addItem({
-                    product: productNode,
-                    variantId,
-                    variantTitle,
-                    price,
-                    quantity: 1,
-                    selectedOptions,
-                  });
-                }}
-                isAdding={isAdding}
+                isHovered={hovered === i}
+                isLast={i === products.length - 1}
+                onEnter={() => setHovered(i)}
+                onLeave={() => setHovered((h) => (h === i ? null : h))}
               />
             </Reveal>
           ))}
@@ -269,74 +256,80 @@ function ProductsSection() {
 
 function ProductRow({
   copy,
-  shopify,
-  loading,
-  onAdd,
-  isAdding,
+  isHovered,
+  isLast,
+  onEnter,
+  onLeave,
 }: {
   copy: (typeof products)[number];
-  shopify: ReturnType<typeof useShopifyProducts>["products"][number] | undefined;
-  loading: boolean;
-  isAdding: boolean;
-  onAdd: (
-    variantId: string,
-    variantTitle: string,
-    price: { amount: string; currencyCode: string },
-    selectedOptions: Array<{ name: string; value: string }>,
-    product: NonNullable<typeof shopify>,
-  ) => Promise<void>;
+  isHovered: boolean;
+  isLast: boolean;
+  onEnter: () => void;
+  onLeave: () => void;
 }) {
-  const variant = shopify?.node.variants.edges[0]?.node;
-  const image = shopify?.node.images.edges[0]?.node;
-  const price = variant?.price;
-
-  void image;
-
   return (
-    <article
-      className="group relative bg-card border border-border/50 transition-all duration-500 hover:-translate-y-1.5 hover:border-primary/60 p-8 md:p-10 flex flex-col h-full"
-      onMouseEnter={(e) => {
-        e.currentTarget.style.boxShadow = "0 0 30px rgba(201,169,110,0.18)";
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.boxShadow = "";
-      }}
+    <Link
+      to={copy.to}
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
+      className={`group flex flex-row items-center min-h-[160px] border-t border-border/30 ${
+        isLast ? "border-b" : ""
+      } transition-colors duration-[400ms] hover:border-primary/50 ${
+        isHovered ? "border-primary/50" : ""
+      }`}
     >
-      <Link to={copy.to} className="block">
-        <div className="serif text-5xl text-primary/30 leading-none">{copy.n}</div>
-        <div className="eyebrow mt-6">{copy.label}</div>
-        <h3 className="serif mt-4 text-4xl md:text-5xl leading-[1.05] tracking-tight transition-colors group-hover:text-primary">
+      {/* Number */}
+      <div className="flex-none w-16 pl-4 md:pl-6">
+        <div
+          className="serif text-primary/20 leading-none"
+          style={{ fontSize: "4rem" }}
+        >
+          {copy.n}
+        </div>
+      </div>
+
+      {/* Middle */}
+      <div className="flex-1 px-6 md:px-10 py-6">
+        <div className="eyebrow">{copy.label}</div>
+        <h3 className="serif mt-3 text-3xl leading-[1.05] tracking-tight transition-colors group-hover:text-primary">
           {copy.name}
         </h3>
-        <p className="serif italic text-primary text-lg mt-4">{copy.tagline}</p>
-        <p className="mt-6 text-foreground/75 leading-[1.8] text-base">{copy.body}</p>
-      </Link>
-
-      <div className="mt-8 flex-1" />
-
-      {price && (
-        <p className="serif text-2xl text-foreground/90 mb-6">
-          {price.currencyCode} {parseFloat(price.amount).toFixed(2)}
+        <p className="serif italic text-primary text-lg mt-2">{copy.tagline}</p>
+        <p className="hidden md:block mt-3 text-sm text-foreground/70 leading-[1.7] line-clamp-2 max-w-2xl">
+          {copy.body}
         </p>
-      )}
+      </div>
 
-      <button
-        onClick={() => {
-          if (!shopify || !variant) return;
-          onAdd(variant.id, variant.title, variant.price, variant.selectedOptions || [], shopify);
+      {/* Image reveal panel */}
+      <div
+        className="overflow-hidden flex-none"
+        style={{
+          width: isHovered ? "16rem" : "0rem",
+          transition: "width 600ms cubic-bezier(0.4,0,0.2,1)",
         }}
-        disabled={loading || isAdding || !variant?.availableForSale}
-        className="btn-gold justify-center w-full"
       >
-        {loading || isAdding ? (
-          <Loader2 className="w-4 h-4 animate-spin" />
-        ) : variant && !variant.availableForSale ? (
-          "Sold out"
-        ) : (
-          <>Add to ritual <span>→</span></>
-        )}
-      </button>
-    </article>
+        <div
+          className="bg-card grain"
+          style={{
+            width: "16rem",
+            aspectRatio: "3 / 2",
+            background: `radial-gradient(ellipse at 50% 50%, color-mix(in oklab, var(--primary) 30%, transparent) 0%, var(--card) 70%), ${copy.bg}`,
+          }}
+        />
+      </div>
+
+      {/* Arrow */}
+      <div
+        className="flex-none w-12 md:w-16 flex justify-center text-primary text-2xl"
+        style={{
+          opacity: isHovered ? 1 : 0,
+          transform: isHovered ? "translateX(0)" : "translateX(-8px)",
+          transition: "opacity 400ms ease, transform 400ms ease",
+        }}
+      >
+        →
+      </div>
+    </Link>
   );
 }
 
