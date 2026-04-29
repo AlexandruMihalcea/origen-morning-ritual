@@ -78,6 +78,7 @@ const ritualSteps = [
 
 function Hero() {
   const ref = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   useEffect(() => {
     const onScroll = () => {
       if (!ref.current) return;
@@ -92,12 +93,29 @@ function Hero() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden grain">
       <video
+        ref={videoRef}
         autoPlay
         muted
         loop
         playsInline
         src="/hero.mp4"
         className="absolute inset-0 w-full h-full object-cover z-0"
+        style={{ transition: "opacity 0.1s linear" }}
+        onLoadedData={() => {
+          if (videoRef.current) videoRef.current.playbackRate = 0.6;
+        }}
+        onTimeUpdate={() => {
+          const v = videoRef.current;
+          if (!v) return;
+          const remaining = v.duration - v.currentTime;
+          if (remaining < 1.2) {
+            v.style.opacity = String(remaining / 1.2);
+          } else if (v.currentTime < 1.2) {
+            v.style.opacity = String(v.currentTime / 1.2);
+          } else {
+            v.style.opacity = "1";
+          }
+        }}
       />
       <div
         className="absolute inset-0 pointer-events-none z-[1]"
