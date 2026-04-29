@@ -84,6 +84,7 @@ async function createShopifyCart(item: CartItem) {
   const data = await storefrontApiRequest<any>(CART_CREATE_MUTATION, {
     input: { lines: [{ quantity: item.quantity, merchandiseId: item.variantId }] },
   });
+  if (!data) return null;
   if (data?.data?.cartCreate?.userErrors?.length > 0) {
     console.error("Cart creation failed:", data.data.cartCreate.userErrors);
     return null;
