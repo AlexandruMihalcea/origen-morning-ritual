@@ -4,6 +4,7 @@ import { Nav } from "../components/Nav";
 import { Footer } from "../components/Footer";
 import { Reveal } from "../components/Reveal";
 import matHero from "@/assets/mat-hero.jpg";
+import rollerHero from "@/assets/roller-hero.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -40,7 +41,7 @@ const products = [
     to: "/the-roller" as const,
     handle: "anti-ageing-treatment-for-face-and-neck-ecotools-jade-jade-set-2",
     bg: "radial-gradient(ellipse at 70% 50%, oklch(0.40 0.04 235 / 0.9), oklch(0.16 0.02 240) 70%)",
-    image: null as string | null,
+    image: rollerHero as string | null,
   },
   {
     n: "03",
