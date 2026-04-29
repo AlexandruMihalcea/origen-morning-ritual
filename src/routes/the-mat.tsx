@@ -1,5 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ProductPage } from "../components/ProductPage";
+import matHero from "@/assets/mat-hero.jpg";
+import matVideo from "@/assets/mat-video.mp4";
+import matLifestyle from "@/assets/mat-lifestyle.jpg";
 
 export const Route = createFileRoute("/the-mat")({
   head: () => ({
@@ -25,6 +28,9 @@ export const Route = createFileRoute("/the-mat")({
           { title: "Nervous system reset", body: "Sympathetic to parasympathetic. Cortisol drops. You arrive in your body before the day asks anything of you." },
         ],
         handle: "acupressure-mat-sensi-massage-mat-pillow-set-applicator-for-neck-foot",
+        heroImage: matHero,
+        heroVideo: matVideo,
+        lifestyleImage: matLifestyle,
       }}
     />
   ),

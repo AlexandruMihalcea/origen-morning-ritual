@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Nav } from "../components/Nav";
 import { Footer } from "../components/Footer";
 import { Reveal } from "../components/Reveal";
+import matHero from "@/assets/mat-hero.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,6 +28,7 @@ const products = [
     to: "/the-mat" as const,
     handle: "acupressure-mat-sensi-massage-mat-pillow-set-applicator-for-neck-foot",
     bg: "radial-gradient(ellipse at 30% 40%, oklch(0.32 0.06 150 / 0.95), oklch(0.14 0.02 150) 70%)",
+    image: matHero,
   },
   {
     n: "02",
@@ -38,6 +40,7 @@ const products = [
     to: "/the-roller" as const,
     handle: "anti-ageing-treatment-for-face-and-neck-ecotools-jade-jade-set-2",
     bg: "radial-gradient(ellipse at 70% 50%, oklch(0.40 0.04 235 / 0.9), oklch(0.16 0.02 240) 70%)",
+    image: null as string | null,
   },
   {
     n: "03",
@@ -49,6 +52,7 @@ const products = [
     to: "/the-oil" as const,
     handle: "facial-oil-la-provencale-bio-30-ml",
     bg: "radial-gradient(ellipse at 40% 60%, oklch(0.45 0.10 60 / 0.92), oklch(0.18 0.04 50) 70%)",
+    image: null as string | null,
   },
 ];
 
@@ -308,14 +312,23 @@ function ProductRow({
           transition: "width 600ms cubic-bezier(0.4,0,0.2,1)",
         }}
       >
-        <div
-          className="bg-card grain"
-          style={{
-            width: "16rem",
-            aspectRatio: "3 / 2",
-            background: `radial-gradient(ellipse at 50% 50%, color-mix(in oklab, var(--primary) 30%, transparent) 0%, var(--card) 70%), ${copy.bg}`,
-          }}
-        />
+        {copy.image ? (
+          <img
+            src={copy.image}
+            alt={copy.name}
+            className="block"
+            style={{ width: "16rem", aspectRatio: "3 / 2", objectFit: "cover" }}
+          />
+        ) : (
+          <div
+            className="bg-card grain"
+            style={{
+              width: "16rem",
+              aspectRatio: "3 / 2",
+              background: `radial-gradient(ellipse at 50% 50%, color-mix(in oklab, var(--primary) 30%, transparent) 0%, var(--card) 70%), ${copy.bg}`,
+            }}
+          />
+        )}
       </div>
 
       {/* Arrow */}
