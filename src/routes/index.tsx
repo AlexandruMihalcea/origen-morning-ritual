@@ -293,70 +293,52 @@ function ProductRow({
   const image = shopify?.node.images.edges[0]?.node;
   const price = variant?.price;
 
-  void onAdd;
-  void loading;
-  void isAdding;
-  void shopify;
-  void variant;
   void image;
 
   return (
-    <article className="group relative bg-transparent">
-      {/* Top gold border */}
-      <div
-        aria-hidden
-        className="absolute inset-x-0 top-0 h-px bg-primary opacity-30 transition-opacity duration-[400ms] ease-in-out group-hover:opacity-100"
-      />
-      {/* Bottom animated gold line */}
-      <div
-        aria-hidden
-        className="absolute bottom-0 left-0 h-px bg-primary w-0 transition-all duration-[400ms] ease-in-out group-hover:w-full"
-      />
+    <article
+      className="group relative bg-card border border-border/50 transition-all duration-500 hover:-translate-y-1.5 hover:border-primary/60 p-8 md:p-10 flex flex-col h-full"
+      onMouseEnter={(e) => {
+        e.currentTarget.style.boxShadow = "0 0 30px rgba(201,169,110,0.18)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.boxShadow = "";
+      }}
+    >
+      <Link to={copy.to} className="block">
+        <div className="serif text-5xl text-primary/30 leading-none">{copy.n}</div>
+        <div className="eyebrow mt-6">{copy.label}</div>
+        <h3 className="serif mt-4 text-4xl md:text-5xl leading-[1.05] tracking-tight transition-colors group-hover:text-primary">
+          {copy.name}
+        </h3>
+        <p className="serif italic text-primary text-lg mt-4">{copy.tagline}</p>
+        <p className="mt-6 text-foreground/75 leading-[1.8] text-base">{copy.body}</p>
+      </Link>
 
-      {/* Watermark number */}
-      <div
-        aria-hidden
-        className="serif pointer-events-none absolute left-4 md:left-10 top-1/2 -translate-y-1/2 select-none leading-none"
-        style={{ fontSize: "16rem", opacity: 0.08 }}
+      <div className="mt-8 flex-1" />
+
+      {price && (
+        <p className="serif text-2xl text-foreground/90 mb-6">
+          {price.currencyCode} {parseFloat(price.amount).toFixed(2)}
+        </p>
+      )}
+
+      <button
+        onClick={() => {
+          if (!shopify || !variant) return;
+          onAdd(variant.id, variant.title, variant.price, variant.selectedOptions || [], shopify);
+        }}
+        disabled={loading || isAdding || !variant?.availableForSale}
+        className="btn-gold justify-center w-full"
       >
-        {copy.n}
-      </div>
-
-      <div className="relative grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 items-center py-20 md:py-28 px-4 md:px-10">
-        {/* Left: label + tagline */}
-        <div className="md:col-span-5">
-          <div className="eyebrow">{copy.n} — {copy.label}</div>
-          <p className="serif italic text-primary/90 mt-6 text-xl md:text-2xl">{copy.tagline}</p>
-        </div>
-
-        {/* Middle: body + price */}
-        <div className="md:col-span-5">
-          <p className="text-foreground/75 leading-[1.9] text-base md:text-lg max-w-xl">
-            {copy.body}
-          </p>
-          {price && (
-            <p className="serif text-2xl mt-6 text-foreground/90">
-              {price.currencyCode} {parseFloat(price.amount).toFixed(2)}
-            </p>
-          )}
-        </div>
-
-        {/* Right: name as link */}
-        <div className="md:col-span-2 flex md:justify-end">
-          <Link
-            to={copy.to}
-            className="serif text-4xl md:text-5xl leading-[0.95] tracking-tight transition-colors hover:text-primary inline-flex items-baseline gap-3 group/link"
-          >
-            <span>{copy.name}</span>
-            <span
-              aria-hidden
-              className="inline-block text-primary opacity-0 -translate-x-2 transition-all duration-300 ease-out group-hover/link:opacity-100 group-hover/link:translate-x-0"
-            >
-              →
-            </span>
-          </Link>
-        </div>
-      </div>
+        {loading || isAdding ? (
+          <Loader2 className="w-4 h-4 animate-spin" />
+        ) : variant && !variant.availableForSale ? (
+          "Sold out"
+        ) : (
+          <>Add to ritual <span>→</span></>
+        )}
+      </button>
     </article>
   );
 }
