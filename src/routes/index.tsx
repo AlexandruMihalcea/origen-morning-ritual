@@ -243,8 +243,7 @@ function ProductsSection() {
           </p>
         </Reveal>
 
-        <div className="mt-24 flex flex-col">
-          <div className="gold-divider" />
+        <div className="mt-24 grid md:grid-cols-3 gap-8 md:gap-10">
           {products.map((p, i) => (
             <Reveal key={p.name} delay={i * 100}>
               <ProductRow
@@ -265,7 +264,6 @@ function ProductsSection() {
               />
             </Reveal>
           ))}
-          <div className="gold-divider" />
         </div>
       </div>
     </section>
