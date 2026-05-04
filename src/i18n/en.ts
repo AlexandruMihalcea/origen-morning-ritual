@@ -67,6 +67,7 @@ export const en = {
     readRitual: 'Read the ritual',
     soldOut: 'Sold out',
     variant: 'Variant',
+    step: 'Step',
   },
   ritualPage: {
     eyebrow: 'The Ritual',
