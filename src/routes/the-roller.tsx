@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ProductPage } from "../components/ProductPage";
 import { useLanguageStore } from "@/stores/languageStore";
 import rollerHero from "@/assets/roller-hero.jpg";
+import rollerVideo from "@/assets/roller-video.mp4";
+import rollerLifestyle from "@/assets/roller-lifestyle.jpg";
 
 export const Route = createFileRoute("/the-roller")({
   head: () => ({
@@ -28,6 +30,8 @@ function RollerPage() {
         benefits: t.rollerPage.benefits as { title: string; body: string }[],
         handle: "anti-ageing-treatment-for-face-and-neck-ecotools-jade-jade-set-2",
         heroImage: rollerHero as string,
+        heroVideo: rollerVideo,
+        lifestyleImage: rollerLifestyle,
       }}
     />
   );
