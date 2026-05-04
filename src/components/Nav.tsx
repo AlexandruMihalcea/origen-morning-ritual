@@ -1,13 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { CartDrawer } from "./CartDrawer";
-import { useLanguageStore, type Language } from "@/stores/languageStore";
-import { useCurrencyStore, type Currency } from "@/stores/currencyStore";
+import { useLanguageStore } from "@/stores/languageStore";
+import { useCurrencyStore } from "@/stores/currencyStore";
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
-  const { lang, setLang, t } = useLanguageStore();
-  const { currency, setCurrency, fetchRates } = useCurrencyStore();
+  const { t } = useLanguageStore();
+  const { fetchRates } = useCurrencyStore();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -40,36 +40,6 @@ export function Nav() {
           <Link to="/about" className="text-foreground/80 hover:text-primary transition-colors">
             {t.nav.about}
           </Link>
-
-          {/* Language selector */}
-          <div className="hidden md:flex items-center gap-0.5 border-l border-border/30 pl-4">
-            {(["en", "it", "es", "fr"] as Language[]).map((l) => (
-              <button
-                key={l}
-                onClick={() => setLang(l)}
-                className={`text-[0.6rem] tracking-[0.15em] uppercase px-1.5 py-0.5 transition-colors ${
-                  lang === l ? "text-primary" : "text-foreground/35 hover:text-foreground/60"
-                }`}
-              >
-                {l}
-              </button>
-            ))}
-          </div>
-
-          {/* Currency selector */}
-          <div className="hidden md:flex items-center gap-0.5 border-l border-border/30 pl-4">
-            {(["GBP", "EUR", "USD"] as Currency[]).map((c) => (
-              <button
-                key={c}
-                onClick={() => setCurrency(c)}
-                className={`text-[0.6rem] tracking-[0.15em] px-1.5 py-0.5 transition-colors ${
-                  currency === c ? "text-primary" : "text-foreground/35 hover:text-foreground/60"
-                }`}
-              >
-                {c === "GBP" ? "£" : c === "EUR" ? "€" : "$"}
-              </button>
-            ))}
-          </div>
 
           <CartDrawer />
         </nav>
