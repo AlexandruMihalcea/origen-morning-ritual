@@ -16,7 +16,7 @@ const BUNDLE_PRODUCTS = [
     image: matHero,
   },
   {
-    handle: "anti-ageing-treatment-for-face-and-neck-ecotools-jade",
+    handle: "anti-ageing-treatment-for-face-and-neck-ecotools-jade-jade-set-2",
     name: "The Roller",
     label: "Cold",
     price: 34,
