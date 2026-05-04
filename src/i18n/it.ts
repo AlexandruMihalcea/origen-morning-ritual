@@ -1,0 +1,123 @@
+import type { Translations } from './en'
+
+export const it: Translations = {
+  nav: { shop: 'Shop', ritual: 'Il Rituale', about: 'Chi Siamo' },
+  hero: {
+    eyebrow: 'Rituale mattutino',
+    headline: 'Prima che il mondo inizi,',
+    headlineItalic: 'questo è tuo.',
+    body: 'Venti minuti. Tre strumenti. Un rituale che cambia le basi di tutto ciò che segue.',
+    cta: 'Inizia il rituale',
+    scroll: 'Scorri',
+  },
+  problem: {
+    line1: 'La maggior parte delle mattine viene rubata prima ancora di cominciare.',
+    line2: 'Prima il telefono. Le notifiche. Gli impegni. Il cortisolo prima del caffè.',
+    line3: 'ORIGEN ridà la mattina.',
+  },
+  ritual: {
+    eyebrow: 'Il Rituale',
+    tagline: 'Non una routine. Non un trucco. Un ritorno a ciò che il corpo già conosce.',
+    steps: [
+      { label: 'Pressione', body: 'Sdraiati sul tappetino. Lascia che i punti facciano il loro lavoro. La tensione si scioglie. Il sistema nervoso si resetta. Arrivi nel tuo corpo prima che il giorno ti chieda qualcosa.' },
+      { label: 'Freddo', body: "Il roller segnala al corpo di svegliarsi — in modo naturale e pulito. Infiammazione ridotta. Mente lucida. Nessuna caffeina necessaria." },
+      { label: 'Nutrimento', body: "Mentre la pelle è calda e aperta, l'olio viene assorbito completamente. Nutrimento che protegge e sigilla — l'atto finale del rituale." },
+    ],
+    closing: 'Tre passi. Venti minuti. Una giornata completamente diversa.',
+    cta: 'Acquista il rituale',
+  },
+  products: {
+    eyebrow: 'Il Kit',
+    tagline: 'Ogni prodotto funziona da solo. Insieme, sono ORIGEN.',
+    mat: { label: 'Pressione', name: 'Il Tappetino', tagline: 'La pressione che stabilizza.', body: "Sdraiati. Lasciati andare. Gli 8.820 punti di agopressione rilasciano la tensione accumulata nella schiena, nel collo e nelle spalle — attivando il sistema nervoso e inondando il corpo di endorfine. Dieci minuti bastano per sentire il cambiamento." },
+    roller: { label: 'Freddo', name: 'Il Roller', tagline: 'Il freddo che affina.', body: "Rotola. Riduci. Reimposta. La terapia del freddo riduce il gonfiore mattutino, calma l'infiammazione e segnala al cervello di svegliarsi — senza il crollo che segue gli stimolanti. Lo strumento più semplice del rituale. Spesso il più difficile da abbandonare." },
+    oil: { label: 'Nutrimento', name: "L'Olio", tagline: 'Il nutrimento che protegge.', body: "La pelle è calda dal tappetino, attivata dal roller. Applicato adesso, viene assorbito completamente. Olio botanico pressato a freddo che nutre, protegge e sigilla — l'atto finale del rituale." },
+  },
+  story: {
+    eyebrow: 'La nostra storia',
+    headline: 'ORIGEN è nata da una domanda: perché la mattina sembra qualcosa da sopravvivere?',
+    body1: "Abbiamo guardato a ciò di cui il corpo ha davvero bisogno — non uno stack di integratori, non una vasca per il bagno freddo, non un'ora di respiro complicato. Tre cose. Pressione per rilasciare ciò che il sonno non ha potuto. Freddo per svegliare ciò che ha bisogno di svegliarsi. Nutrimento per sigillare e proteggere.",
+    body2: "Questo è ORIGEN. Torna alle basi che funzionano. I venti minuti prima che il mondo ti chieda qualcosa.",
+    body3: "L'abbiamo costruito per le persone che prendono le loro mattine sul serio — non perché devono, ma perché hanno imparato cosa costa non farlo.",
+  },
+  email: {
+    headline: 'Unisciti al rituale.',
+    body: 'Accesso anticipato. Sconto sul primo ordine. Nient\'altro.',
+    placeholder: 'la.tua@email.com',
+    cta: 'Sono dentro',
+    success: 'Benvenuto ✓',
+    error: 'Qualcosa è andato storto. Riprova.',
+  },
+  footer: {
+    tagline: 'Torna alle basi. Vola più in alto.',
+    shop: 'Shop', ritual: 'Il Rituale', about: 'Chi Siamo', contact: 'Contatti',
+    terms: 'Termini e Condizioni', refund: 'Politica di Rimborso',
+    copyright: '© 2026 ORIGEN. Tutti i diritti riservati.',
+  },
+  cart: {
+    title: 'Il tuo rituale',
+    empty: 'Vuoto',
+    emptyMessage: 'Il tuo rituale ti aspetta.',
+    subtotal: 'Subtotale',
+    checkout: 'Acquista',
+    shipping: 'Spedizione e tasse calcolate al checkout',
+    decrease: 'Diminuisci', increase: 'Aumenta', remove: 'Rimuovi',
+  },
+  product: {
+    back: '← Torna al kit',
+    addToRitual: 'Aggiungi al rituale',
+    readRitual: 'Leggi il rituale',
+    soldOut: 'Esaurito',
+    variant: 'Variante',
+  },
+  ritualPage: {
+    eyebrow: 'Il Rituale',
+    headline: 'Il Rituale',
+    intro: "Venti minuti. È tutto ciò che serve. Non una routine mattutina che abbandonerai in due settimane. Tre strumenti. Una sequenza che lavora con i sistemi del tuo corpo. Completato prima del primo caffè.",
+    whyEyebrow: 'Perché la mattina',
+    whyBody: "La mattina è l'unica parte della giornata che è interamente tua — prima della posta in arrivo, degli obblighi, delle decisioni che iniziano ad accumularsi. Quello che fai in quei primi venti minuti imposta la base fisiologica e mentale per tutto ciò che segue. La maggior parte delle persone la consegna al proprio telefono. ORIGEN è l'alternativa.",
+    steps: [
+      { label: 'Pressione', time: '10 minuti', body: "Sdraiati sul tappetino di agopressione. Cuscino sotto il collo. Gli 8.820 punti stimolano i recettori di pressione attraverso schiena e collo, attivando il rilascio di endorfine e ossitocina. Il cortisolo scende. Il sistema nervoso passa da simpatico a parasimpatico. Non devi fare nulla. Questo è il punto." },
+      { label: 'Freddo', time: '3 minuti', body: "Prendi il roller. Inizia dalla fronte, muoviti verso l'esterno e verso il basso. La terapia del freddo attiva la vasocostrizione — i vasi sanguigni si restringono, poi si dilatano. L'infiammazione si riduce. Il gonfiore scompare. La vigilanza che ne segue è guadagnata, non presa in prestito." },
+      { label: 'Nutrimento', time: '2 minuti', body: "Scalda l'olio tra i palmi. Premi sul viso, collo e décolleté. La pelle è al massimo della sua recettività — calda dal tappetino, circolazione attivata dal roller. Questo è quando assorbe più in profondità. Due minuti. Il sigillo del rituale." },
+    ],
+    sequenceEyebrow: 'La Sequenza',
+    sequenceHeadline: 'Pressione → Freddo → Nutrimento',
+    sequenceBody: "In quest'ordine. Il tappetino apre il corpo. Il roller lo attiva. L'olio lo ripristina e lo protegge. Venti minuti. Poi la giornata è tua.",
+    sequenceCta: 'Acquista il rituale completo',
+  },
+  aboutPage: {
+    eyebrow: 'Origine',
+    headline: 'Chi è ORIGEN',
+    body1: 'La maggior parte dei brand wellness ti vende complessità. Più integratori. Più passaggi. Più cose da monitorare, ottimizzare, e alla fine abbandonare.',
+    body2: "ORIGEN è il contrario. Siamo tornati alle basi — le tre cose a cui il corpo risponde e che hanno sempre funzionato. Pressione. Freddo. Nutrimento. Applicati in sequenza, ogni mattina, prima che il mondo inizi.",
+    body3: "È tutto.",
+    body4: "Il nome è intenzionale. Origen — origine, in spagnolo e italiano. Il luogo prima che iniziasse il rumore. La versione di te che esiste prima del cortisolo, del tempo sullo schermo, delle decisioni.",
+    tagline: 'Venti minuti ogni mattina. Torna alle basi. Vola più in alto.',
+    cta: 'Leggi il rituale',
+  },
+  matPage: {
+    intro: "Sdraiati. Lasciati andare. Gli 8.820 punti di agopressione rilasciano la tensione accumulata nella schiena, nel collo e nelle spalle — attivando il sistema nervoso e inondando il corpo di endorfine. Dieci minuti bastano per sentire il cambiamento.",
+    benefits: [
+      { title: '8.820 punti', body: 'Stimolano i recettori di pressione su schiena, collo e spalle. La tensione si dissolve dove vive.' },
+      { title: 'Rilascio di endorfine', body: 'Il corpo risponde con la propria chimica — una spinta pulita e naturale che dura ore dopo esserti alzato.' },
+      { title: 'Reset del sistema nervoso', body: 'Da simpatico a parasimpatico. Il cortisolo scende. Arrivi nel tuo corpo prima che il giorno ti chieda qualcosa.' },
+    ],
+  },
+  rollerPage: {
+    intro: "Rotola. Riduci. Reimposta. La terapia del freddo riduce il gonfiore mattutino, calma l'infiammazione e segnala al cervello di svegliarsi — senza il crollo che segue gli stimolanti. Lo strumento più semplice del rituale. Spesso il più difficile da abbandonare.",
+    benefits: [
+      { title: 'Terapia del freddo', body: 'Attiva la vasocostrizione poi la dilatazione. Il sangue si muove. Il gonfiore si riduce. Il tono della pelle migliora.' },
+      { title: 'Vigilanza naturale', body: 'Il cervello si sveglia attraverso la sensazione, non gli stimolanti. Nessun crollo da caffeina. Solo concentrazione pulita.' },
+      { title: "Reset dell'infiammazione", body: 'Calma la bassa infiammazione mattutina che si accumula dalla posizione del sonno e dall\'esposizione agli schermi.' },
+    ],
+  },
+  oilPage: {
+    intro: "La pelle è calda dal tappetino, attivata dal roller. Applicato adesso, viene assorbito completamente. Olio botanico pressato a freddo che nutre, protegge e sigilla — l'atto finale del rituale.",
+    benefits: [
+      { title: 'Assorbimento profondo', body: 'Applicato mentre la pelle è calda e la circolazione è attiva. È quando penetra più in profondità.' },
+      { title: 'Botanico pressato a freddo', body: 'La Provençale Bio — base di olio d\'oliva biologico certificato. Ingredienti puliti. Nulla di superfluo.' },
+      { title: 'Il sigillo del rituale', body: 'L\'ultimo passo blocca tutto ciò che è venuto prima. Protezione che dura tutto il giorno.' },
+    ],
+  },
+}

@@ -1,0 +1,123 @@
+import type { Translations } from './en'
+
+export const fr: Translations = {
+  nav: { shop: 'Boutique', ritual: 'Le Rituel', about: 'À propos' },
+  hero: {
+    eyebrow: 'Rituel matinal',
+    headline: 'Avant que le monde commence,',
+    headlineItalic: "c'est le tien.",
+    body: 'Vingt minutes. Trois outils. Un rituel qui change les bases de tout ce qui suit.',
+    cta: 'Commencer le rituel',
+    scroll: 'Défiler',
+  },
+  problem: {
+    line1: 'La plupart des matins sont volés avant même de commencer.',
+    line2: "D'abord le téléphone. Les notifications. Les obligations. Le cortisol avant le café.",
+    line3: 'ORIGEN rend le matin.',
+  },
+  ritual: {
+    eyebrow: 'Le Rituel',
+    tagline: 'Pas une routine. Pas une astuce. Un retour à ce que le corps sait déjà.',
+    steps: [
+      { label: 'Pression', body: "Allonge-toi sur le tapis. Laisse les points faire leur travail. La tension se libère. Le système nerveux se remet à zéro. Tu arrives dans ton corps avant que la journée ne te demande quoi que ce soit." },
+      { label: 'Froid', body: "Le roller signale au corps de se réveiller — naturellement, proprement. Inflammation réduite. Esprit vif. Aucune caféine requise." },
+      { label: 'Nutrition', body: "Pendant que la peau est chaude et ouverte, l'huile s'absorbe complètement. Une nutrition qui protège et scelle — l'acte final du rituel." },
+    ],
+    closing: 'Trois étapes. Vingt minutes. Une journée complètement différente.',
+    cta: 'Acheter le rituel',
+  },
+  products: {
+    eyebrow: 'Le Kit',
+    tagline: 'Chaque produit fonctionne seul. Ensemble, ils sont ORIGEN.',
+    mat: { label: 'Pression', name: 'Le Tapis', tagline: 'La pression qui ancre.', body: "Allonge-toi. Lâche prise. Les 8 820 points d'acupression libèrent la tension accumulée dans le dos, le cou et les épaules — activant le système nerveux et inondant le corps d'endorphines. Dix minutes suffisent pour sentir le changement." },
+    roller: { label: 'Froid', name: 'Le Roller', tagline: 'Le froid qui affûte.', body: "Roule. Réduis. Réinitialise. La cryothérapie réduit les gonflements matinaux, calme l'inflammation et signale au cerveau de se réveiller — sans le crash qui suit les stimulants. L'outil le plus simple du rituel. Souvent le plus addictif." },
+    oil: { label: 'Nutrition', name: "L'Huile", tagline: 'La nutrition qui protège.', body: "La peau est chaude grâce au tapis, activée par le roller. Appliquée maintenant, elle s'absorbe complètement. Huile botanique pressée à froid qui nourrit, protège et scelle — l'acte final du rituel." },
+  },
+  story: {
+    eyebrow: 'Notre histoire',
+    headline: "ORIGEN est né d'une question : pourquoi le matin ressemble-t-il à quelque chose à survivre ?",
+    body1: "Nous avons regardé ce dont le corps a réellement besoin — pas une pile de suppléments, pas une installation de bain froid, pas une heure de respiration compliquée. Trois choses. La pression pour libérer ce que le sommeil n'a pas pu. Le froid pour réveiller ce qui a besoin de l'être. La nutrition pour sceller et protéger.",
+    body2: "C'est ORIGEN. Retour aux bases qui fonctionnent. Les vingt minutes avant que le monde ne te demande quoi que ce soit.",
+    body3: "Nous l'avons construit pour les personnes qui prennent leurs matins au sérieux — non pas parce qu'elles y sont obligées, mais parce qu'elles ont appris ce que ça coûte de ne pas le faire.",
+  },
+  email: {
+    headline: 'Rejoins le rituel.',
+    body: 'Accès anticipé. Réduction sur la première commande. Rien d\'autre.',
+    placeholder: 'ton@email.com',
+    cta: "Je suis partant",
+    success: 'Bienvenue ✓',
+    error: "Une erreur s'est produite. Réessaie.",
+  },
+  footer: {
+    tagline: 'Retour aux bases. Vole plus haut.',
+    shop: 'Boutique', ritual: 'Le Rituel', about: 'À propos', contact: 'Contact',
+    terms: 'Conditions Générales', refund: 'Politique de Remboursement',
+    copyright: '© 2026 ORIGEN. Tous droits réservés.',
+  },
+  cart: {
+    title: 'Ton rituel',
+    empty: 'Vide',
+    emptyMessage: 'Ton rituel t\'attend.',
+    subtotal: 'Sous-total',
+    checkout: 'Commander',
+    shipping: 'Livraison et taxes calculées lors du paiement',
+    decrease: 'Diminuer', increase: 'Augmenter', remove: 'Supprimer',
+  },
+  product: {
+    back: '← Retour au kit',
+    addToRitual: 'Ajouter au rituel',
+    readRitual: 'Lire le rituel',
+    soldOut: 'Épuisé',
+    variant: 'Variante',
+  },
+  ritualPage: {
+    eyebrow: 'Le Rituel',
+    headline: 'Le Rituel',
+    intro: "Vingt minutes. C'est tout ce qu'il faut. Pas une routine matinale que tu abandonneras dans deux semaines. Trois outils. Une séquence qui travaille avec les propres systèmes du corps. Terminé avant ton premier café.",
+    whyEyebrow: 'Pourquoi le matin',
+    whyBody: "Le matin est la seule partie de la journée qui t'appartient entièrement — avant la boîte de réception, les obligations, les décisions qui commencent à s'accumuler. Ce que tu fais dans ces vingt premières minutes établit la base physiologique et mentale pour tout ce qui suit. La plupart des gens le donnent à leur téléphone. ORIGEN est l'alternative.",
+    steps: [
+      { label: 'Pression', time: '10 minutes', body: "Allonge-toi sur le tapis d'acupression. Oreiller sous le cou. Les 8 820 points stimulent les récepteurs de pression dans le dos et le cou, déclenchant la libération d'endorphines et d'ocytocine. Le cortisol baisse. Le système nerveux passe du sympathique au parasympathique. Tu n'as rien à faire. C'est l'idée." },
+      { label: 'Froid', time: '3 minutes', body: "Prends le roller. Commence par le front, déplace-toi vers l'extérieur et vers le bas. La cryothérapie déclenche la vasoconstriction — les vaisseaux sanguins se rétrécissent, puis se dilatent. L'inflammation se réduit. Les gonflements disparaissent. L'état d'alerte qui suit est mérité, pas emprunté." },
+      { label: 'Nutrition', time: '2 minutes', body: "Chauffe l'huile entre tes paumes. Appuie sur le visage, le cou et le décolleté. La peau est à sa plus grande réceptivité — chaude grâce au tapis, circulation activée par le roller. C'est quand elle absorbe le plus profondément. Deux minutes. Le sceau du rituel." },
+    ],
+    sequenceEyebrow: 'La Séquence',
+    sequenceHeadline: 'Pression → Froid → Nutrition',
+    sequenceBody: "Dans cet ordre. Le tapis ouvre le corps. Le roller l'active. L'huile le restaure et le protège. Vingt minutes. Ensuite la journée est à toi.",
+    sequenceCta: 'Acheter le rituel complet',
+  },
+  aboutPage: {
+    eyebrow: 'Origine',
+    headline: 'À propos d\'ORIGEN',
+    body1: 'La plupart des marques bien-être te vendent de la complexité. Plus de suppléments. Plus d\'étapes. Plus de choses à suivre, optimiser et finalement abandonner.',
+    body2: 'ORIGEN est le contraire. Nous sommes retournés aux bases — les trois choses auxquelles le corps répond et qui ont toujours fonctionné. Pression. Froid. Nutrition. Appliquées en séquence, chaque matin, avant que le monde commence.',
+    body3: "C'est tout.",
+    body4: "Le nom est intentionnel. Origen — origine, en espagnol et en italien. Le lieu avant que le bruit commence. La version de toi qui existe avant le cortisol, le temps d'écran, les décisions.",
+    tagline: 'Vingt minutes chaque matin. Retour aux bases. Vole plus haut.',
+    cta: 'Lire le rituel',
+  },
+  matPage: {
+    intro: "Allonge-toi. Lâche prise. Les 8 820 points d'acupression libèrent la tension accumulée dans le dos, le cou et les épaules — activant le système nerveux et inondant le corps d'endorphines. Dix minutes suffisent pour sentir le changement.",
+    benefits: [
+      { title: '8 820 points', body: 'Stimulent les récepteurs de pression dans le dos, le cou et les épaules. La tension se dissout là où elle réside.' },
+      { title: "Libération d'endorphines", body: 'Le corps répond avec sa propre chimie — un élan propre et naturel qui dure des heures après le réveil.' },
+      { title: 'Remise à zéro du système nerveux', body: 'Du sympathique au parasympathique. Le cortisol baisse. Tu arrives dans ton corps avant que la journée ne te demande quoi que ce soit.' },
+    ],
+  },
+  rollerPage: {
+    intro: "Roule. Réduis. Réinitialise. La cryothérapie réduit les gonflements matinaux, calme l'inflammation et signale au cerveau de se réveiller — sans le crash qui suit les stimulants. L'outil le plus simple du rituel. Souvent le plus addictif.",
+    benefits: [
+      { title: 'Cryothérapie', body: 'Active la vasoconstriction puis la dilatation. Le sang se déplace. Les gonflements se réduisent. Le teint s\'améliore.' },
+      { title: 'Éveil naturel', body: 'Le cerveau se réveille par la sensation, pas par les stimulants. Pas de crash caféine. Juste une concentration propre.' },
+      { title: "Remise à zéro de l'inflammation", body: "Calme l'inflammation matinale de bas niveau qui s'accumule à cause de la position de sommeil et de l'exposition aux écrans." },
+    ],
+  },
+  oilPage: {
+    intro: "La peau est chaude grâce au tapis, activée par le roller. Appliquée maintenant, elle s'absorbe complètement. Huile botanique pressée à froid qui nourrit, protège et scelle — l'acte final du rituel.",
+    benefits: [
+      { title: 'Absorption profonde', body: "Appliquée pendant que la peau est chaude et la circulation active. C'est quand elle pénètre le plus profondément." },
+      { title: 'Botanique pressé à froid', body: "La Provençale Bio — base d'huile d'olive biologique certifiée. Ingrédients propres. Rien d'inutile." },
+      { title: 'Le sceau du rituel', body: "La dernière étape verrouille tout ce qui est venu avant. Une protection qui dure toute la journée." },
+    ],
+  },
+}

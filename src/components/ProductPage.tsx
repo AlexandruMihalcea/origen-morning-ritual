@@ -6,6 +6,8 @@ import { Reveal } from "./Reveal";
 import { Loader2 } from "lucide-react";
 import { useShopifyProduct } from "@/hooks/useShopifyProducts";
 import { useCartStore } from "@/stores/cartStore";
+import { useLanguageStore } from "@/stores/languageStore";
+import { useCurrencyStore } from "@/stores/currencyStore";
 
 export type ProductInfo = {
   step: string;
@@ -37,9 +39,9 @@ const moods: Record<string, { gradient: string; glow: string }> = {
 
 function moodFor(name: string) {
   const key = name.toLowerCase();
-  if (key.includes("mat")) return moods["the-mat"];
+  if (key.includes("mat") || key.includes("tappetino") || key.includes("esterilla") || key.includes("tapis")) return moods["the-mat"];
   if (key.includes("roller")) return moods["the-roller"];
-  if (key.includes("oil")) return moods["the-oil"];
+  if (key.includes("oil") || key.includes("olio") || key.includes("aceite") || key.includes("huile")) return moods["the-oil"];
   return moods["the-mat"];
 }
 
@@ -47,6 +49,8 @@ export function ProductPage({ p }: { p: ProductInfo }) {
   const { product, loading } = useShopifyProduct(p.handle);
   const addItem = useCartStore((s) => s.addItem);
   const isAdding = useCartStore((s) => s.isLoading);
+  const { t } = useLanguageStore();
+  const { convert } = useCurrencyStore();
 
   const variants = product?.node.variants.edges ?? [];
   const [selectedVariantId, setSelectedVariantId] = useState<string | null>(null);
@@ -78,7 +82,7 @@ export function ProductPage({ p }: { p: ProductInfo }) {
         <div className="mx-auto max-w-6xl">
           <Reveal>
             <Link to="/" hash="products" className="text-xs tracking-[0.22em] uppercase text-muted-foreground hover:text-primary transition-colors">
-              ← Back to the kit
+              {t.product.back}
             </Link>
           </Reveal>
 
@@ -100,76 +104,58 @@ export function ProductPage({ p }: { p: ProductInfo }) {
                   />
                 ) : (
                   <>
-                {/* Atmospheric glow */}
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{ background: mood.glow }}
-                />
-
-                {/* Large watermark name */}
-                <div className="absolute inset-0 flex items-end overflow-hidden pointer-events-none">
-                  <div
-                    className="serif italic leading-[0.8] whitespace-nowrap select-none"
-                    style={{
-                      fontSize: "clamp(8rem, 22vw, 18rem)",
-                      color: "rgba(245, 240, 232, 0.06)",
-                      transform: "translate(-8%, 18%)",
-                      letterSpacing: "-0.04em",
-                    }}
-                  >
-                    {p.name}
-                  </div>
-                </div>
-
-                {/* Step number top-left */}
-                <div className="absolute top-8 left-8 z-10">
-                  <div className="eyebrow text-foreground/70">Step {p.step}</div>
-                  <div className="serif text-6xl md:text-7xl text-primary/80 leading-none mt-2">
-                    {p.step}
-                  </div>
-                </div>
-
-                {/* Product image floating */}
-                {image && (
-                  <img
-                    src={image.url}
-                    alt={image.altText || p.name}
-                    className="absolute inset-0 m-auto w-[70%] h-[70%] object-contain z-[5]"
-                    style={{ filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.5))" }}
-                  />
-                )}
-
-                {/* Label bottom-right */}
-                <div className="absolute bottom-8 right-8 z-10">
-                  <div className="eyebrow text-primary">{p.label}</div>
-                </div>
-
-                {/* Vignette */}
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background: "radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.5) 100%)",
-                  }}
-                />
+                    <div className="absolute inset-0 pointer-events-none" style={{ background: mood.glow }} />
+                    <div className="absolute inset-0 flex items-end overflow-hidden pointer-events-none">
+                      <div
+                        className="serif italic leading-[0.8] whitespace-nowrap select-none"
+                        style={{
+                          fontSize: "clamp(8rem, 22vw, 18rem)",
+                          color: "rgba(245, 240, 232, 0.06)",
+                          transform: "translate(-8%, 18%)",
+                          letterSpacing: "-0.04em",
+                        }}
+                      >
+                        {p.name}
+                      </div>
+                    </div>
+                    <div className="absolute top-8 left-8 z-10">
+                      <div className="eyebrow text-foreground/70">{t.product.step} {p.step}</div>
+                      <div className="serif text-6xl md:text-7xl text-primary/80 leading-none mt-2">{p.step}</div>
+                    </div>
+                    {image && (
+                      <img
+                        src={image.url}
+                        alt={image.altText || p.name}
+                        className="absolute inset-0 m-auto w-[70%] h-[70%] object-contain z-[5]"
+                        style={{ filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.5))" }}
+                      />
+                    )}
+                    <div className="absolute bottom-8 right-8 z-10">
+                      <div className="eyebrow text-primary">{p.label}</div>
+                    </div>
+                    <div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{ background: "radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.5) 100%)" }}
+                    />
                   </>
                 )}
               </div>
             </Reveal>
 
             <Reveal delay={200}>
-              <span className="eyebrow">Step {p.step} — {p.label}</span>
+              <span className="eyebrow">{t.product.step} {p.step} — {p.label}</span>
               <h1 className="serif mt-4 text-5xl md:text-7xl leading-[1.05]">{p.name}</h1>
               <p className="serif italic text-2xl text-primary mt-4">{p.tagline}</p>
               {price && (
                 <p className="serif text-3xl mt-6 text-foreground">
-                  {price.currencyCode} {parseFloat(price.amount).toFixed(2)}
+                  {convert(price.amount, price.currencyCode)}
                 </p>
               )}
               <p className="mt-8 text-lg leading-[1.8] text-foreground/85">{p.intro}</p>
 
               {variants.length > 1 && (
                 <div className="mt-8">
-                  <div className="eyebrow mb-3">Variant</div>
+                  <div className="eyebrow mb-3">{t.product.variant}</div>
                   <div className="flex flex-wrap gap-2">
                     {variants.map((v) => {
                       const active = (selectedVariantId ?? variants[0]?.node.id) === v.node.id;
@@ -178,9 +164,7 @@ export function ProductPage({ p }: { p: ProductInfo }) {
                           key={v.node.id}
                           onClick={() => setSelectedVariantId(v.node.id)}
                           className={`px-4 py-2 text-xs tracking-[0.15em] uppercase border transition-colors ${
-                            active
-                              ? "border-primary text-primary"
-                              : "border-border/60 text-foreground/70 hover:border-primary/60"
+                            active ? "border-primary text-primary" : "border-border/60 text-foreground/70 hover:border-primary/60"
                           }`}
                           disabled={!v.node.availableForSale}
                         >
@@ -201,13 +185,13 @@ export function ProductPage({ p }: { p: ProductInfo }) {
                   {loading || isAdding ? (
                     <Loader2 className="w-4 h-4 animate-spin" />
                   ) : selectedVariant && !selectedVariant.availableForSale ? (
-                    "Sold out"
+                    t.product.soldOut
                   ) : (
-                    <>Add to ritual <span>→</span></>
+                    <>{t.product.addToRitual} <span>→</span></>
                   )}
                 </button>
                 <Link to="/the-ritual" className="btn-gold" style={{ borderColor: "color-mix(in oklab, var(--primary) 40%, transparent)" }}>
-                  Read the ritual
+                  {t.product.readRitual}
                 </Link>
               </div>
             </Reveal>

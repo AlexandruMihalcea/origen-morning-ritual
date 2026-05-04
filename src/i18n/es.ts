@@ -1,0 +1,123 @@
+import type { Translations } from './en'
+
+export const es: Translations = {
+  nav: { shop: 'Tienda', ritual: 'El Ritual', about: 'Nosotros' },
+  hero: {
+    eyebrow: 'Ritual matutino',
+    headline: 'Antes de que el mundo comience,',
+    headlineItalic: 'esto es tuyo.',
+    body: 'Veinte minutos. Tres herramientas. Un ritual que cambia la base de todo lo que sigue.',
+    cta: 'Comienza el ritual',
+    scroll: 'Desliza',
+  },
+  problem: {
+    line1: 'La mayoría de las mañanas son robadas antes de comenzar.',
+    line2: 'Primero el teléfono. Notificaciones. Obligaciones. Cortisol antes del café.',
+    line3: 'ORIGEN devuelve la mañana.',
+  },
+  ritual: {
+    eyebrow: 'El Ritual',
+    tagline: 'No una rutina. No un truco. Un regreso a lo que el cuerpo ya sabe.',
+    steps: [
+      { label: 'Presión', body: 'Recuéstate en la esterilla. Deja que los puntos hagan el trabajo. La tensión se libera. El sistema nervioso se reinicia. Llegas a tu cuerpo antes de que el día te pida algo.' },
+      { label: 'Frío', body: 'El roller le indica al cuerpo que despierte — de forma natural y limpia. Inflamación reducida. Mente clara. Sin necesidad de cafeína.' },
+      { label: 'Nutrición', body: 'Mientras la piel está cálida y abierta, el aceite se absorbe completamente. Nutrición que protege y sella — el acto final del ritual.' },
+    ],
+    closing: 'Tres pasos. Veinte minutos. Un día completamente diferente.',
+    cta: 'Compra el ritual',
+  },
+  products: {
+    eyebrow: 'El Kit',
+    tagline: 'Cada producto funciona solo. Juntos, son ORIGEN.',
+    mat: { label: 'Presión', name: 'La Esterilla', tagline: 'La presión que enraíza.', body: "Recuéstate. Suéltate. Los 8.820 puntos de acupresión liberan la tensión acumulada en la espalda, el cuello y los hombros — activando el sistema nervioso e inundando el cuerpo de endorfinas. Diez minutos son suficientes para sentir el cambio." },
+    roller: { label: 'Frío', name: 'El Roller', tagline: 'El frío que agudiza.', body: 'Rueda. Reduce. Reinicia. La terapia de frío reduce la hinchazón matutina, calma la inflamación y le indica al cerebro que despierte — sin el bajón que sigue a los estimulantes. La herramienta más simple del ritual. A menudo la más adictiva.' },
+    oil: { label: 'Nutrición', name: 'El Aceite', tagline: 'La nutrición que protege.', body: 'La piel está cálida por la esterilla, activada por el roller. Aplicado ahora, se absorbe completamente. Aceite botánico prensado en frío que nutre, protege y sella — el acto final del ritual.' },
+  },
+  story: {
+    eyebrow: 'Nuestra historia',
+    headline: 'ORIGEN comenzó con una pregunta: ¿por qué la mañana parece algo que hay que sobrevivir?',
+    body1: "Miramos lo que el cuerpo realmente necesita — no una pila de suplementos, no una instalación de baño frío, no una hora de respiración complicada. Tres cosas. Presión para liberar lo que el sueño no pudo. Frío para despertar lo que necesita despertar. Nutrición para sellar y proteger.",
+    body2: "Eso es ORIGEN. Volver a las bases que funcionan. Los veinte minutos antes de que el mundo te pida algo.",
+    body3: "Lo construimos para personas que se toman sus mañanas en serio — no porque tengan que hacerlo, sino porque han aprendido lo que cuesta no hacerlo.",
+  },
+  email: {
+    headline: 'Únete al ritual.',
+    body: 'Acceso anticipado. Descuento en el primer pedido. Nada más.',
+    placeholder: 'tu@email.com',
+    cta: 'Estoy dentro',
+    success: 'Bienvenido ✓',
+    error: 'Algo salió mal. Inténtalo de nuevo.',
+  },
+  footer: {
+    tagline: 'Vuelve a lo básico. Vuela más alto.',
+    shop: 'Tienda', ritual: 'El Ritual', about: 'Nosotros', contact: 'Contacto',
+    terms: 'Términos y Condiciones', refund: 'Política de Devoluciones',
+    copyright: '© 2026 ORIGEN. Todos los derechos reservados.',
+  },
+  cart: {
+    title: 'Tu ritual',
+    empty: 'Vacío',
+    emptyMessage: 'Tu ritual te espera.',
+    subtotal: 'Subtotal',
+    checkout: 'Comprar',
+    shipping: 'Envío e impuestos calculados al finalizar la compra',
+    decrease: 'Disminuir', increase: 'Aumentar', remove: 'Eliminar',
+  },
+  product: {
+    back: '← Volver al kit',
+    addToRitual: 'Añadir al ritual',
+    readRitual: 'Leer el ritual',
+    soldOut: 'Agotado',
+    variant: 'Variante',
+  },
+  ritualPage: {
+    eyebrow: 'El Ritual',
+    headline: 'El Ritual',
+    intro: "Veinte minutos. Eso es todo lo que se necesita. No una rutina matutina que abandonarás en dos semanas. Tres herramientas. Una secuencia que trabaja con los propios sistemas del cuerpo. Terminado antes de tu primer café.",
+    whyEyebrow: 'Por qué la mañana',
+    whyBody: "La mañana es la única parte del día que es completamente tuya — antes de la bandeja de entrada, las obligaciones, las decisiones que empiezan a acumularse. Lo que haces en esos primeros veinte minutos establece la base fisiológica y mental para todo lo que sigue. La mayoría de las personas se la entregan a su teléfono. ORIGEN es la alternativa.",
+    steps: [
+      { label: 'Presión', time: '10 minutos', body: "Recuéstate en la esterilla de acupresión. Almohada bajo el cuello. Los 8.820 puntos estimulan los receptores de presión en la espalda y el cuello, desencadenando la liberación de endorfinas y oxitocina. El cortisol baja. El sistema nervioso pasa de simpático a parasimpático. No necesitas hacer nada. Ese es el punto." },
+      { label: 'Frío', time: '3 minutos', body: "Toma el roller. Comienza por la frente, muévete hacia afuera y hacia abajo. La terapia de frío desencadena la vasoconstricción — los vasos sanguíneos se estrechan, luego se dilatan. La inflamación se reduce. La hinchazón desaparece. El estado de alerta que sigue es ganado, no prestado." },
+      { label: 'Nutrición', time: '2 minutos', body: "Calienta el aceite entre las palmas. Presiona sobre el rostro, cuello y escote. La piel está en su mayor receptividad — cálida por la esterilla, circulación activada por el roller. Es cuando absorbe más profundo. Dos minutos. El sello del ritual." },
+    ],
+    sequenceEyebrow: 'La Secuencia',
+    sequenceHeadline: 'Presión → Frío → Nutrición',
+    sequenceBody: 'En ese orden. La esterilla abre el cuerpo. El roller lo activa. El aceite lo restaura y protege. Veinte minutos. Luego el día es tuyo.',
+    sequenceCta: 'Compra el ritual completo',
+  },
+  aboutPage: {
+    eyebrow: 'Origen',
+    headline: 'Sobre ORIGEN',
+    body1: 'La mayoría de las marcas de bienestar te venden complejidad. Más suplementos. Más pasos. Más cosas que rastrear, optimizar y eventualmente abandonar.',
+    body2: 'ORIGEN es lo contrario. Volvimos a lo básico — las tres cosas a las que el cuerpo responde que siempre han funcionado. Presión. Frío. Nutrición. Aplicadas en secuencia, cada mañana, antes de que el mundo comience.',
+    body3: "Eso es todo.",
+    body4: "El nombre es intencional. Origen — origen, en español e italiano. El lugar antes de que comenzara el ruido. La versión de ti que existe antes del cortisol, el tiempo de pantalla, las decisiones.",
+    tagline: 'Veinte minutos cada mañana. Vuelve a lo básico. Vuela más alto.',
+    cta: 'Leer el ritual',
+  },
+  matPage: {
+    intro: "Recuéstate. Suéltate. Los 8.820 puntos de acupresión liberan la tensión acumulada en la espalda, el cuello y los hombros — activando el sistema nervioso e inundando el cuerpo de endorfinas. Diez minutos son suficientes para sentir el cambio.",
+    benefits: [
+      { title: '8.820 puntos', body: 'Estimulan los receptores de presión en espalda, cuello y hombros. La tensión se disuelve donde vive.' },
+      { title: 'Liberación de endorfinas', body: 'El cuerpo responde con su propia química — un impulso limpio y natural que dura horas después de levantarte.' },
+      { title: 'Reinicio del sistema nervioso', body: 'De simpático a parasimpático. El cortisol baja. Llegas a tu cuerpo antes de que el día te pida algo.' },
+    ],
+  },
+  rollerPage: {
+    intro: 'Rueda. Reduce. Reinicia. La terapia de frío reduce la hinchazón matutina, calma la inflamación y le indica al cerebro que despierte — sin el bajón que sigue a los estimulantes. La herramienta más simple del ritual. A menudo la más adictiva.',
+    benefits: [
+      { title: 'Terapia de frío', body: 'Activa la vasoconstricción luego la dilatación. La sangre se mueve. La hinchazón se reduce. El tono de la piel mejora.' },
+      { title: 'Alerta natural', body: 'El cerebro despierta a través de la sensación, no los estimulantes. Sin bajón de cafeína. Solo enfoque limpio.' },
+      { title: 'Reinicio de la inflamación', body: 'Calma la inflamación matutina de bajo nivel que se acumula por la posición al dormir y la exposición a pantallas.' },
+    ],
+  },
+  oilPage: {
+    intro: 'La piel está cálida por la esterilla, activada por el roller. Aplicado ahora, se absorbe completamente. Aceite botánico prensado en frío que nutre, protege y sella — el acto final del ritual.',
+    benefits: [
+      { title: 'Absorción profunda', body: 'Aplicado mientras la piel está cálida y la circulación activa. Es cuando penetra más profundo.' },
+      { title: 'Botánico prensado en frío', body: 'La Provençale Bio — base de aceite de oliva orgánico certificado. Ingredientes limpios. Nada innecesario.' },
+      { title: 'El sello del ritual', body: 'El último paso bloquea todo lo anterior. Protección que dura todo el día.' },
+    ],
+  },
+}

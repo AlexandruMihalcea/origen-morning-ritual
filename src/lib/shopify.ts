@@ -43,7 +43,7 @@ export async function storefrontApiRequest<T = any>(
   });
 
   if (response.status === 402) {
-    console.error("Shopify: Payment required - upgrade your Shopify plan at https://admin.shopify.com");
+    console.error("Shopify: Payment required - upgrade your Shopify plan");
     return;
   }
 
@@ -98,4 +98,30 @@ export async function fetchProductByHandle(handle: string): Promise<ShopifyProdu
   const res = await storefrontApiRequest<{ product: ShopifyProduct["node"] | null }>(PRODUCT_BY_HANDLE_QUERY, { handle });
   const node = res?.data?.product;
   return node ? { node } : null;
+}
+
+const CUSTOMER_CREATE_MUTATION = `
+  mutation customerCreate($input: CustomerCreateInput!) {
+    customerCreate(input: $input) {
+      customer { id email acceptsMarketing }
+      customerUserErrors { code field message }
+    }
+  }
+`;
+
+export async function subscribeEmail(email: string): Promise<{ success: boolean }> {
+  try {
+    const password = typeof crypto !== "undefined" && crypto.randomUUID
+      ? crypto.randomUUID()
+      : Math.random().toString(36).slice(2) + Date.now().toString(36);
+    const res = await storefrontApiRequest<any>(CUSTOMER_CREATE_MUTATION, {
+      input: { email, password, acceptsMarketing: true },
+    });
+    const errors: Array<{ code: string; message: string }> = res?.data?.customerCreate?.customerUserErrors ?? [];
+    const alreadyExists = errors.some((e) => e.code === "TAKEN" || e.code === "CUSTOMER_DISABLED");
+    const created = res?.data?.customerCreate?.customer != null;
+    return { success: created || alreadyExists };
+  } catch {
+    return { success: false };
+  }
 }

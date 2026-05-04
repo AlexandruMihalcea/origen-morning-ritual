@@ -4,23 +4,17 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ShoppingBag, Minus, Plus, Trash2, ExternalLink, Loader2 } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
+import { useLanguageStore } from "@/stores/languageStore";
+import { useCurrencyStore } from "@/stores/currencyStore";
 
 export function CartDrawer() {
-  const {
-    items,
-    isLoading,
-    isSyncing,
-    isOpen,
-    setOpen,
-    updateQuantity,
-    removeItem,
-    getCheckoutUrl,
-    syncCart,
-  } = useCartStore();
+  const { items, isLoading, isSyncing, isOpen, setOpen, updateQuantity, removeItem, getCheckoutUrl, syncCart } = useCartStore();
+  const { t } = useLanguageStore();
+  const { convert } = useCurrencyStore();
 
   const totalItems = items.reduce((s, i) => s + i.quantity, 0);
-  const totalPrice = items.reduce((s, i) => s + parseFloat(i.price.amount) * i.quantity, 0);
-  const currency = items[0]?.price.currencyCode || "USD";
+  const baseCurrency = items[0]?.price.currencyCode || "USD";
+  const totalAmount = items.reduce((s, i) => s + parseFloat(i.price.amount) * i.quantity, 0).toString();
 
   useEffect(() => {
     if (isOpen) syncCart();
@@ -37,10 +31,7 @@ export function CartDrawer() {
   return (
     <Sheet open={isOpen} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <button
-          aria-label="Cart"
-          className="relative text-foreground/80 hover:text-primary transition-colors"
-        >
+        <button aria-label="Cart" className="relative text-foreground/80 hover:text-primary transition-colors">
           <ShoppingBag className="h-5 w-5" strokeWidth={1.25} />
           {totalItems > 0 && (
             <Badge className="absolute -top-2 -right-2 h-4 min-w-4 px-1 rounded-full text-[10px] flex items-center justify-center bg-primary text-primary-foreground border-0">
@@ -51,9 +42,9 @@ export function CartDrawer() {
       </SheetTrigger>
       <SheetContent className="w-full sm:max-w-md flex flex-col h-full bg-background border-l border-border/50">
         <SheetHeader className="flex-shrink-0">
-          <SheetTitle className="serif text-2xl font-normal">Your ritual</SheetTitle>
+          <SheetTitle className="serif text-2xl font-normal">{t.cart.title}</SheetTitle>
           <SheetDescription className="eyebrow text-foreground/60">
-            {totalItems === 0 ? "Empty" : `${totalItems} item${totalItems !== 1 ? "s" : ""}`}
+            {totalItems === 0 ? t.cart.empty : `${totalItems} item${totalItems !== 1 ? "s" : ""}`}
           </SheetDescription>
         </SheetHeader>
         <div className="flex flex-col flex-1 pt-6 min-h-0">
@@ -61,7 +52,7 @@ export function CartDrawer() {
             <div className="flex-1 flex items-center justify-center text-center">
               <div>
                 <ShoppingBag className="h-10 w-10 text-foreground/30 mx-auto mb-4" strokeWidth={1} />
-                <p className="serif italic text-foreground/60">Your ritual awaits.</p>
+                <p className="serif italic text-foreground/60">{t.cart.emptyMessage}</p>
               </div>
             </div>
           ) : (
@@ -85,14 +76,14 @@ export function CartDrawer() {
                             <p className="text-xs text-foreground/60 mt-1">{item.variantTitle}</p>
                           )}
                           <p className="text-sm text-primary mt-2">
-                            {currency} {parseFloat(item.price.amount).toFixed(2)}
+                            {convert(item.price.amount, item.price.currencyCode)}
                           </p>
                           <div className="mt-auto flex items-center justify-between pt-3">
                             <div className="flex items-center gap-2 border border-border/60">
                               <button
                                 className="h-7 w-7 grid place-items-center hover:text-primary"
                                 onClick={() => updateQuantity(item.variantId, item.quantity - 1)}
-                                aria-label="Decrease"
+                                aria-label={t.cart.decrease}
                               >
                                 <Minus className="h-3 w-3" />
                               </button>
@@ -100,7 +91,7 @@ export function CartDrawer() {
                               <button
                                 className="h-7 w-7 grid place-items-center hover:text-primary"
                                 onClick={() => updateQuantity(item.variantId, item.quantity + 1)}
-                                aria-label="Increase"
+                                aria-label={t.cart.increase}
                               >
                                 <Plus className="h-3 w-3" />
                               </button>
@@ -108,7 +99,7 @@ export function CartDrawer() {
                             <button
                               onClick={() => removeItem(item.variantId)}
                               className="text-foreground/50 hover:text-primary"
-                              aria-label="Remove"
+                              aria-label={t.cart.remove}
                             >
                               <Trash2 className="h-4 w-4" />
                             </button>
@@ -121,9 +112,9 @@ export function CartDrawer() {
               </div>
               <div className="flex-shrink-0 space-y-5 pt-6 border-t border-border/40">
                 <div className="flex justify-between items-baseline">
-                  <span className="eyebrow">Subtotal</span>
+                  <span className="eyebrow">{t.cart.subtotal}</span>
                   <span className="serif text-2xl text-primary">
-                    {currency} {totalPrice.toFixed(2)}
+                    {convert(totalAmount, baseCurrency)}
                   </span>
                 </div>
                 <Button
@@ -135,13 +126,11 @@ export function CartDrawer() {
                   {isLoading || isSyncing ? (
                     <Loader2 className="w-4 h-4 animate-spin" />
                   ) : (
-                    <>
-                      Checkout <ExternalLink className="w-3 h-3 ml-2" />
-                    </>
+                    <>{t.cart.checkout} <ExternalLink className="w-3 h-3 ml-2" /></>
                   )}
                 </Button>
                 <p className="text-[0.65rem] tracking-[0.2em] uppercase text-foreground/40 text-center">
-                  Shipping & taxes calculated at checkout
+                  {t.cart.shipping}
                 </p>
               </div>
             </>

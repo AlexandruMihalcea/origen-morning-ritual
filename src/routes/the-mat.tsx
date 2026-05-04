@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ProductPage } from "../components/ProductPage";
+import { useLanguageStore } from "@/stores/languageStore";
 import matHero from "@/assets/mat-hero.jpg";
 import matVideo from "@/assets/mat-video.mp4";
 import matLifestyle from "@/assets/mat-lifestyle.jpg";
@@ -13,25 +14,25 @@ export const Route = createFileRoute("/the-mat")({
       { property: "og:description", content: "Pressure that grounds." },
     ],
   }),
-  component: () => (
+  component: MatPage,
+});
+
+function MatPage() {
+  const { t } = useLanguageStore();
+  return (
     <ProductPage
       p={{
         step: "01",
-        label: "Pressure",
-        name: "The Mat",
-        tagline: "Pressure that grounds.",
-        intro:
-          "Lie down. Let go. The mat's 8,820 acupressure points release tension held in the back, neck, and shoulders — activating the nervous system and flooding the body with endorphins. Ten minutes is enough to feel the shift.",
-        benefits: [
-          { title: "8,820 points", body: "Stimulate pressure receptors across the back, neck and shoulders. Tension dissolves where it lives." },
-          { title: "Endorphin release", body: "The body responds with its own chemistry — a clean, natural lift that lasts hours after you stand up." },
-          { title: "Nervous system reset", body: "Sympathetic to parasympathetic. Cortisol drops. You arrive in your body before the day asks anything of you." },
-        ],
+        label: t.products.mat.label,
+        name: t.products.mat.name,
+        tagline: t.products.mat.tagline,
+        intro: t.matPage.intro,
+        benefits: t.matPage.benefits as { title: string; body: string }[],
         handle: "acupressure-mat-sensi-massage-mat-pillow-set-applicator-for-neck-foot",
         heroImage: matHero,
         heroVideo: matVideo,
         lifestyleImage: matLifestyle,
       }}
     />
-  ),
-});
+  );
+}

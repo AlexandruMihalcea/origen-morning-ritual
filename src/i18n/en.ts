@@ -1,0 +1,123 @@
+export const en = {
+  nav: { shop: 'Shop', ritual: 'The Ritual', about: 'About' },
+  hero: {
+    eyebrow: 'Morning ritual',
+    headline: 'Before the world starts,',
+    headlineItalic: 'this is yours.',
+    body: 'Twenty minutes. Three tools. One ritual that changes the baseline for everything that follows.',
+    cta: 'Begin the ritual',
+    scroll: 'Scroll',
+  },
+  problem: {
+    line1: 'Most mornings are stolen before they begin.',
+    line2: 'Phone first. Notifications. Obligations. Cortisol before coffee.',
+    line3: 'ORIGEN gives the morning back.',
+  },
+  ritual: {
+    eyebrow: 'The Ritual',
+    tagline: 'Not a routine. Not a hack. A return to what the body already knows.',
+    steps: [
+      { label: 'Pressure', body: 'Lie on the mat. Let the points do the work. Tension releases. The nervous system resets. You arrive in your body before the day asks anything of you.' },
+      { label: 'Cold', body: 'The roller signals the body to wake — naturally, cleanly. Inflammation down. Mind sharp. No caffeine required.' },
+      { label: 'Nourish', body: "While the skin is warm and open, the oil absorbs completely. Nourishment that protects and seals — the ritual's final act." },
+    ],
+    closing: 'Three steps. Twenty minutes. A completely different day.',
+    cta: 'Shop the ritual',
+  },
+  products: {
+    eyebrow: 'The Kit',
+    tagline: 'Each product works alone. Together, they are ORIGEN.',
+    mat: { label: 'Pressure', name: 'The Mat', tagline: 'Pressure that grounds.', body: "Lie down. Let go. The mat's 8,820 acupressure points release tension in the back, neck, and shoulders — activating the nervous system and flooding the body with endorphins. Ten minutes is enough to feel the shift." },
+    roller: { label: 'Cold', name: 'The Roller', tagline: 'Cold that sharpens.', body: 'Roll. Reduce. Reset. Cold therapy reduces morning puffiness, calms inflammation, and signals the brain to wake — without the crash that follows stimulants. The simplest tool in the ritual. Often the most addictive.' },
+    oil: { label: 'Nourish', name: 'The Oil', tagline: 'Nourishment that protects.', body: "The skin is warm from the mat, activated from the roller. Applied now, it absorbs completely. Cold-pressed botanical oil that nourishes, protects, and seals — the ritual's final act." },
+  },
+  story: {
+    eyebrow: 'Our story',
+    headline: 'ORIGEN started with one question: why does the morning feel like something to survive?',
+    body1: "We looked at what the body actually needs — not a supplement stack, not a cold plunge facility, not an hour of complicated breathwork. Three things. Pressure to release what sleep couldn't. Cold to wake what needs waking. Nourishment to seal and protect.",
+    body2: "That's ORIGEN. Back to the basics that work. The twenty minutes before the world asks anything of you.",
+    body3: "We built this for people who take their mornings seriously — not because they have to, but because they've learned what it costs not to.",
+  },
+  email: {
+    headline: 'Join the ritual.',
+    body: 'Early access. First order discount. Nothing else.',
+    placeholder: 'your@email.com',
+    cta: "I'm in",
+    success: 'Welcome ✓',
+    error: 'Something went wrong. Try again.',
+  },
+  footer: {
+    tagline: 'Back to basics. Fly higher.',
+    shop: 'Shop', ritual: 'The Ritual', about: 'About', contact: 'Contact',
+    terms: 'Terms & Conditions', refund: 'Refund Policy',
+    copyright: '© 2026 ORIGEN. All rights reserved.',
+  },
+  cart: {
+    title: 'Your ritual',
+    empty: 'Empty',
+    emptyMessage: 'Your ritual awaits.',
+    subtotal: 'Subtotal',
+    checkout: 'Checkout',
+    shipping: 'Shipping & taxes calculated at checkout',
+    decrease: 'Decrease', increase: 'Increase', remove: 'Remove',
+  },
+  product: {
+    back: '← Back to the kit',
+    addToRitual: 'Add to ritual',
+    readRitual: 'Read the ritual',
+    soldOut: 'Sold out',
+    variant: 'Variant',
+  },
+  ritualPage: {
+    eyebrow: 'The Ritual',
+    headline: 'The Ritual',
+    intro: "Twenty minutes. That's all this takes. Not a morning routine you'll abandon in two weeks. Three tools. A sequence that works with the body's own systems. Done before your first coffee.",
+    whyEyebrow: 'Why the morning',
+    whyBody: "The morning is the only part of the day that is entirely yours — before the inbox, the obligations, the decisions start accumulating. What you do with those first twenty minutes sets the physiological and mental baseline for everything that follows. Most people hand it to their phone. ORIGEN is the alternative.",
+    steps: [
+      { label: 'Pressure', time: '10 minutes', body: "Lie on the acupressure mat. Pillow under the neck. The 8,820 points stimulate pressure receptors across the back and neck, triggering the release of endorphins and oxytocin. Cortisol drops. The nervous system shifts from sympathetic to parasympathetic. You don't need to do anything. That's the point." },
+      { label: 'Cold', time: '3 minutes', body: 'Take the roller. Start at the forehead, move outward and down. Cold therapy triggers vasoconstriction — blood vessels narrow, then dilate. Inflammation reduces. Puffiness disappears. The alertness that follows is earned, not borrowed.' },
+      { label: 'Nourish', time: '2 minutes', body: "Warm the oil between your palms. Press into the face, neck, and décolletage. The skin is at its most receptive — warm from the mat, circulation activated from the roller. This is when it absorbs deepest. Two minutes. The ritual's seal." },
+    ],
+    sequenceEyebrow: 'The Sequence',
+    sequenceHeadline: 'Pressure → Cold → Nourish',
+    sequenceBody: 'In that order. The mat opens the body. The roller activates it. The oil restores and protects it. Twenty minutes. Then the day is yours.',
+    sequenceCta: 'Shop the full ritual',
+  },
+  aboutPage: {
+    eyebrow: 'Origin',
+    headline: 'About ORIGEN',
+    body1: 'Most wellness brands sell you complexity. More supplements. More steps. More things to track, optimise, and eventually abandon.',
+    body2: 'ORIGEN is the opposite. We went back to the basics — the three things the body responds to that have always worked. Pressure. Cold. Nourishment. Applied in sequence, every morning, before the world starts.',
+    body3: "That's it.",
+    body4: "The name is intentional. Origen — origin, in Spanish and Italian. The place before the noise started. The version of you that exists before the cortisol, the screen time, the decisions.",
+    tagline: 'Twenty minutes every morning. Back to basics. Fly higher.',
+    cta: 'Read the ritual',
+  },
+  matPage: {
+    intro: "Lie down. Let go. The mat's 8,820 acupressure points release tension held in the back, neck, and shoulders — activating the nervous system and flooding the body with endorphins. Ten minutes is enough to feel the shift.",
+    benefits: [
+      { title: '8,820 points', body: 'Stimulate pressure receptors across the back, neck and shoulders. Tension dissolves where it lives.' },
+      { title: 'Endorphin release', body: 'The body responds with its own chemistry — a clean, natural lift that lasts hours after you stand up.' },
+      { title: 'Nervous system reset', body: 'Sympathetic to parasympathetic. Cortisol drops. You arrive in your body before the day asks anything of you.' },
+    ],
+  },
+  rollerPage: {
+    intro: 'Roll. Reduce. Reset. Cold therapy reduces morning puffiness, calms inflammation, and signals the brain to wake — without the crash that follows stimulants. The simplest tool in the ritual. Often the most addictive.',
+    benefits: [
+      { title: 'Cold therapy', body: 'Triggers vasoconstriction then dilation. Blood moves. Puffiness reduces. Skin tone improves.' },
+      { title: 'Natural alertness', body: 'The brain wakes through sensation, not stimulants. No caffeine crash. Just clean focus.' },
+      { title: 'Inflammation reset', body: 'Calms the low-level morning inflammation that accumulates from sleep position and screen exposure.' },
+    ],
+  },
+  oilPage: {
+    intro: "The skin is warm from the mat, activated from the roller. Applied now, it absorbs completely. Cold-pressed botanical oil that nourishes, protects, and seals — the ritual's final act.",
+    benefits: [
+      { title: 'Deep absorption', body: 'Applied while the skin is warm and circulation is active. This is when it penetrates deepest.' },
+      { title: 'Cold-pressed botanical', body: 'La Provençale Bio — certified organic olive oil base. Clean ingredients. Nothing unnecessary.' },
+      { title: "The ritual's seal", body: 'The final step locks in everything that came before. Protection that lasts through the day.' },
+    ],
+  },
+} as const
+
+export type Translations = typeof en
