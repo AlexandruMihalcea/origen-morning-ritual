@@ -46,9 +46,11 @@ export function RitualBundle({ variant = "section" }: { variant?: "section" | "p
   const ready = products.every((p) => p.product?.node.variants.edges[0]?.node);
 
   const handleAddBundle = async () => {
+    console.log("[bundle] click", { products: products.map((p) => ({ loading: p.loading, hasProduct: !!p.product, vid: p.product?.node.variants.edges[0]?.node.id })) });
     for (const { product } of products) {
       const variantNode = product?.node.variants.edges[0]?.node;
       if (!product || !variantNode) continue;
+      console.log("[bundle] addItem", variantNode.id);
       await addItem({
         product,
         variantId: variantNode.id,
