@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TheRollerRouteImport } from './routes/the-roller'
+import { Route as TheRitualBundleRouteImport } from './routes/the-ritual-bundle'
 import { Route as TheRitualRouteImport } from './routes/the-ritual'
 import { Route as TheOilRouteImport } from './routes/the-oil'
 import { Route as TheMatRouteImport } from './routes/the-mat'
@@ -21,6 +22,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const TheRollerRoute = TheRollerRouteImport.update({
   id: '/the-roller',
   path: '/the-roller',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TheRitualBundleRoute = TheRitualBundleRouteImport.update({
+  id: '/the-ritual-bundle',
+  path: '/the-ritual-bundle',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TheRitualRoute = TheRitualRouteImport.update({
@@ -67,6 +73,7 @@ export interface FileRoutesByFullPath {
   '/the-mat': typeof TheMatRoute
   '/the-oil': typeof TheOilRoute
   '/the-ritual': typeof TheRitualRoute
+  '/the-ritual-bundle': typeof TheRitualBundleRoute
   '/the-roller': typeof TheRollerRoute
 }
 export interface FileRoutesByTo {
@@ -77,6 +84,7 @@ export interface FileRoutesByTo {
   '/the-mat': typeof TheMatRoute
   '/the-oil': typeof TheOilRoute
   '/the-ritual': typeof TheRitualRoute
+  '/the-ritual-bundle': typeof TheRitualBundleRoute
   '/the-roller': typeof TheRollerRoute
 }
 export interface FileRoutesById {
@@ -88,6 +96,7 @@ export interface FileRoutesById {
   '/the-mat': typeof TheMatRoute
   '/the-oil': typeof TheOilRoute
   '/the-ritual': typeof TheRitualRoute
+  '/the-ritual-bundle': typeof TheRitualBundleRoute
   '/the-roller': typeof TheRollerRoute
 }
 export interface FileRouteTypes {
@@ -100,6 +109,7 @@ export interface FileRouteTypes {
     | '/the-mat'
     | '/the-oil'
     | '/the-ritual'
+    | '/the-ritual-bundle'
     | '/the-roller'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -110,6 +120,7 @@ export interface FileRouteTypes {
     | '/the-mat'
     | '/the-oil'
     | '/the-ritual'
+    | '/the-ritual-bundle'
     | '/the-roller'
   id:
     | '__root__'
@@ -120,6 +131,7 @@ export interface FileRouteTypes {
     | '/the-mat'
     | '/the-oil'
     | '/the-ritual'
+    | '/the-ritual-bundle'
     | '/the-roller'
   fileRoutesById: FileRoutesById
 }
@@ -131,6 +143,7 @@ export interface RootRouteChildren {
   TheMatRoute: typeof TheMatRoute
   TheOilRoute: typeof TheOilRoute
   TheRitualRoute: typeof TheRitualRoute
+  TheRitualBundleRoute: typeof TheRitualBundleRoute
   TheRollerRoute: typeof TheRollerRoute
 }
 
@@ -141,6 +154,13 @@ declare module '@tanstack/react-router' {
       path: '/the-roller'
       fullPath: '/the-roller'
       preLoaderRoute: typeof TheRollerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/the-ritual-bundle': {
+      id: '/the-ritual-bundle'
+      path: '/the-ritual-bundle'
+      fullPath: '/the-ritual-bundle'
+      preLoaderRoute: typeof TheRitualBundleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/the-ritual': {
@@ -203,8 +223,18 @@ const rootRouteChildren: RootRouteChildren = {
   TheMatRoute: TheMatRoute,
   TheOilRoute: TheOilRoute,
   TheRitualRoute: TheRitualRoute,
+  TheRitualBundleRoute: TheRitualBundleRoute,
   TheRollerRoute: TheRollerRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}

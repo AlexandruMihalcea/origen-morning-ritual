@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Nav } from "../components/Nav";
 import { Footer } from "../components/Footer";
 import { Reveal } from "../components/Reveal";
+import { RitualBundle } from "../components/RitualBundle";
 import { useLanguageStore } from "@/stores/languageStore";
 import { subscribeEmail } from "@/lib/shopify";
 import matHero from "@/assets/mat-hero.jpg";
@@ -291,6 +292,8 @@ function Index() {
       <RitualSection />
       <div className="gold-divider mx-auto max-w-5xl" />
       <ProductsSection />
+      <div className="gold-divider mx-auto max-w-5xl" />
+      <RitualBundle />
       <div className="gold-divider mx-auto max-w-5xl" />
       <StorySection />
       <EmailSection />
