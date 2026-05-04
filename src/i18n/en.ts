@@ -67,6 +67,7 @@ export const en = {
     readRitual: 'Read the ritual',
     soldOut: 'Sold out',
     variant: 'Variant',
+    step: 'Step',
   },
   ritualPage: {
     eyebrow: 'The Ritual',
@@ -118,6 +119,6 @@ export const en = {
       { title: "The ritual's seal", body: 'The final step locks in everything that came before. Protection that lasts through the day.' },
     ],
   },
-} as const
+}
 
 export type Translations = typeof en

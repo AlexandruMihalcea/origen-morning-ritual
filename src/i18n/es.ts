@@ -69,6 +69,7 @@ export const es: Translations = {
     readRitual: 'Leer el ritual',
     soldOut: 'Agotado',
     variant: 'Variante',
+    step: 'Paso',
   },
   ritualPage: {
     eyebrow: 'El Ritual',
