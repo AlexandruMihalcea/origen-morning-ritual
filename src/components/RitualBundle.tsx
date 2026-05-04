@@ -39,6 +39,7 @@ export function RitualBundle({ variant = "section" }: { variant?: "section" | "p
   const oil = useShopifyProduct(BUNDLE_PRODUCTS[2].handle);
   const addItem = useCartStore((s) => s.addItem);
   const isLoading = useCartStore((s) => s.isLoading);
+  const setOpen = useCartStore((s) => s.setOpen);
 
   const products = [mat, roller, oil];
   const loading = products.some((p) => p.loading);
@@ -57,6 +58,7 @@ export function RitualBundle({ variant = "section" }: { variant?: "section" | "p
         selectedOptions: variantNode.selectedOptions || [],
       });
     }
+    setOpen(true);
   };
 
   const isPage = variant === "page";
