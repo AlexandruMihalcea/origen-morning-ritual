@@ -81,7 +81,7 @@ function TermsPage() {
             </Section>
 
             <Section title="11. Contact">
-              <p>For any questions regarding these Terms and Conditions, please contact us at <a href="mailto:hello@origen.co" className="text-primary hover:underline">hello@origen.co</a>.</p>
+              <p>For any questions regarding these Terms and Conditions, please contact us at <a href="mailto:origenltd@proton.me" className="text-primary hover:underline">origenltd@proton.me</a>.</p>
             </Section>
           </Reveal>
 

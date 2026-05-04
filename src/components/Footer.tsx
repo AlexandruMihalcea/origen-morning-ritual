@@ -14,7 +14,7 @@ export function Footer() {
           <Link to="/" hash="products" className="hover:text-primary transition-colors">{t.footer.shop}</Link>
           <Link to="/the-ritual" className="hover:text-primary transition-colors">{t.footer.ritual}</Link>
           <Link to="/about" className="hover:text-primary transition-colors">{t.footer.about}</Link>
-          <a href="mailto:hello@origen.co" className="hover:text-primary transition-colors">{t.footer.contact}</a>
+          <a href="mailto:origenltd@proton.me" className="hover:text-primary transition-colors">{t.footer.contact}</a>
           <Link to="/terms" className="hover:text-primary transition-colors">{t.footer.terms}</Link>
           <Link to="/refund-policy" className="hover:text-primary transition-colors">{t.footer.refund}</Link>
         </nav>
