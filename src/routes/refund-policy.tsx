@@ -49,7 +49,7 @@ function RefundPage() {
             </Section>
 
             <Section title="How to Return">
-              <p>To initiate a return, please email us at <a href="mailto:hello@origen.co" className="text-primary hover:underline">hello@origen.co</a> with:</p>
+              <p>To initiate a return, please email us at <a href="mailto:origenltd@proton.me" className="text-primary hover:underline">origenltd@proton.me</a> with:</p>
               <ul className="list-disc pl-6 space-y-1 mt-2">
                 <li>Your order number</li>
                 <li>The item(s) you wish to return</li>
@@ -77,7 +77,7 @@ function RefundPage() {
             </Section>
 
             <Section title="Faulty or Incorrect Items">
-              <p>If your item arrives damaged, defective, or is not the item you ordered, please contact us immediately at <a href="mailto:hello@origen.co" className="text-primary hover:underline">hello@origen.co</a> with your order number and photos of the issue.</p>
+              <p>If your item arrives damaged, defective, or is not the item you ordered, please contact us immediately at <a href="mailto:origenltd@proton.me" className="text-primary hover:underline">origenltd@proton.me</a> with your order number and photos of the issue.</p>
               <p>We will arrange a full refund or replacement at no additional cost to you, including covering return shipping where applicable.</p>
             </Section>
 
@@ -86,7 +86,7 @@ function RefundPage() {
             </Section>
 
             <Section title="Contact">
-              <p>If you have any questions about our refund policy, please contact us at <a href="mailto:hello@origen.co" className="text-primary hover:underline">hello@origen.co</a>. We aim to respond to all enquiries within 24 hours.</p>
+              <p>If you have any questions about our refund policy, please contact us at <a href="mailto:origenltd@proton.me" className="text-primary hover:underline">origenltd@proton.me</a>. We aim to respond to all enquiries within 24 hours.</p>
             </Section>
           </Reveal>
 
