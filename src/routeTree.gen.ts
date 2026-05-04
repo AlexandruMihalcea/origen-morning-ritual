@@ -13,6 +13,8 @@ import { Route as TheRollerRouteImport } from './routes/the-roller'
 import { Route as TheRitualRouteImport } from './routes/the-ritual'
 import { Route as TheOilRouteImport } from './routes/the-oil'
 import { Route as TheMatRouteImport } from './routes/the-mat'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -36,6 +38,16 @@ const TheMatRoute = TheMatRouteImport.update({
   path: '/the-mat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RefundPolicyRoute = RefundPolicyRouteImport.update({
+  id: '/refund-policy',
+  path: '/refund-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -50,6 +62,8 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/refund-policy': typeof RefundPolicyRoute
+  '/terms': typeof TermsRoute
   '/the-mat': typeof TheMatRoute
   '/the-oil': typeof TheOilRoute
   '/the-ritual': typeof TheRitualRoute
@@ -58,6 +72,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/refund-policy': typeof RefundPolicyRoute
+  '/terms': typeof TermsRoute
   '/the-mat': typeof TheMatRoute
   '/the-oil': typeof TheOilRoute
   '/the-ritual': typeof TheRitualRoute
@@ -67,6 +83,8 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/refund-policy': typeof RefundPolicyRoute
+  '/terms': typeof TermsRoute
   '/the-mat': typeof TheMatRoute
   '/the-oil': typeof TheOilRoute
   '/the-ritual': typeof TheRitualRoute
@@ -77,16 +95,28 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/refund-policy'
+    | '/terms'
     | '/the-mat'
     | '/the-oil'
     | '/the-ritual'
     | '/the-roller'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/the-mat' | '/the-oil' | '/the-ritual' | '/the-roller'
+  to:
+    | '/'
+    | '/about'
+    | '/refund-policy'
+    | '/terms'
+    | '/the-mat'
+    | '/the-oil'
+    | '/the-ritual'
+    | '/the-roller'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/refund-policy'
+    | '/terms'
     | '/the-mat'
     | '/the-oil'
     | '/the-ritual'
@@ -96,6 +126,8 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  RefundPolicyRoute: typeof RefundPolicyRoute
+  TermsRoute: typeof TermsRoute
   TheMatRoute: typeof TheMatRoute
   TheOilRoute: typeof TheOilRoute
   TheRitualRoute: typeof TheRitualRoute
@@ -132,6 +164,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TheMatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/refund-policy': {
+      id: '/refund-policy'
+      path: '/refund-policy'
+      fullPath: '/refund-policy'
+      preLoaderRoute: typeof RefundPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -152,6 +198,8 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  RefundPolicyRoute: RefundPolicyRoute,
+  TermsRoute: TermsRoute,
   TheMatRoute: TheMatRoute,
   TheOilRoute: TheOilRoute,
   TheRitualRoute: TheRitualRoute,
