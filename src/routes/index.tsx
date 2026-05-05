@@ -10,16 +10,35 @@ import matHero from "@/assets/mat-hero.jpg";
 import rollerHero from "@/assets/roller-hero.jpg";
 import oilHero from "@/assets/oil-hero.jpg";
 import heroVideo from "@/assets/hero-video.mp4";
+import { seoMeta, jsonLdScript, SITE_URL } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "ORIGEN — Back to basics. Fly higher." },
-      { name: "description", content: "A twenty-minute morning ritual. Pressure. Cold. Nourish. Three tools that change the baseline of the day." },
-      { property: "og:title", content: "ORIGEN — Back to basics. Fly higher." },
-      { property: "og:description", content: "Twenty minutes. Three tools. One ritual." },
-    ],
-  }),
+  head: () => {
+    const seo = seoMeta({
+      title: "ORIGEN — The Morning Ritual | Acupressure, Jade Roller & Bio Oil",
+      description:
+        "Transform your morning in three steps. ORIGEN's wellness ritual kit — acupressure mat, jade facial roller, and bio facial oil. Free shipping. Ships worldwide.",
+      path: "/",
+      image: matHero,
+    });
+    return {
+      ...seo,
+      scripts: [
+        jsonLdScript({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "ORIGEN",
+          url: SITE_URL,
+          logo: `${SITE_URL}/favicon.svg`,
+          contactPoint: {
+            "@type": "ContactPoint",
+            email: "origenltd@proton.me",
+            contactType: "customer support",
+          },
+        }),
+      ],
+    };
+  },
   component: Index,
 });
 
