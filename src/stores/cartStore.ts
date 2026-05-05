@@ -149,10 +149,12 @@ export const useCartStore = create<CartStore>()(
       items: [],
       cartId: null,
       checkoutUrl: null,
+      cartMessage: null,
       isLoading: false,
       isSyncing: false,
       isOpen: false,
       setOpen: (v) => set({ isOpen: v }),
+      clearCartMessage: () => set({ cartMessage: null }),
 
       addItem: async (item) => {
         const { items, cartId, clearCart } = get();
@@ -167,6 +169,7 @@ export const useCartStore = create<CartStore>()(
                 checkoutUrl: result.checkoutUrl,
                 items: [{ ...item, lineId: result.lineId }],
                 isOpen: true,
+                cartMessage: null,
               });
             }
           } else if (existing) {
@@ -178,13 +181,14 @@ export const useCartStore = create<CartStore>()(
               set({
                 items: cur.map((i) => (i.variantId === item.variantId ? { ...i, quantity: newQty } : i)),
                 isOpen: true,
+                cartMessage: null,
               });
             } else if (result.cartNotFound) clearCart();
           } else {
             const result = await addLineToShopifyCart(cartId, { ...item, lineId: null });
             if (result.success) {
               const cur = get().items;
-              set({ items: [...cur, { ...item, lineId: result.lineId ?? null }], isOpen: true });
+              set({ items: [...cur, { ...item, lineId: result.lineId ?? null }], isOpen: true, cartMessage: null });
             } else if (result.cartNotFound) clearCart();
           }
         } catch (e) {
