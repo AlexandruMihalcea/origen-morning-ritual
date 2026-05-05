@@ -16,10 +16,12 @@ interface CartStore {
   items: CartItem[];
   cartId: string | null;
   checkoutUrl: string | null;
+  cartMessage: string | null;
   isLoading: boolean;
   isSyncing: boolean;
   isOpen: boolean;
   setOpen: (v: boolean) => void;
+  clearCartMessage: () => void;
   addItem: (item: Omit<CartItem, "lineId">) => Promise<void>;
   updateQuantity: (variantId: string, quantity: number) => Promise<void>;
   removeItem: (variantId: string) => Promise<void>;
@@ -28,7 +30,16 @@ interface CartStore {
   getCheckoutUrl: () => string | null;
 }
 
-const CART_QUERY = `query cart($id: ID!) { cart(id: $id) { id totalQuantity } }`;
+const CART_QUERY = `
+  query cart($id: ID!) {
+    cart(id: $id) {
+      id
+      checkoutUrl
+      totalQuantity
+      lines(first: 100) { edges { node { id merchandise { ... on ProductVariant { id } } quantity } } }
+    }
+  }
+`;
 
 const CART_CREATE_MUTATION = `
   mutation cartCreate($input: CartInput!) {
@@ -78,6 +89,10 @@ function isCartNotFoundError(userErrors: Array<{ field: string[] | null; message
     const m = e.message.toLowerCase();
     return m.includes("cart not found") || m.includes("does not exist");
   });
+}
+
+function formatUserErrors(userErrors: Array<{ message: string }>, fallback: string): string {
+  return userErrors.map((e) => e.message).filter(Boolean).join(" ") || fallback;
 }
 
 async function createShopifyCart(item: CartItem) {
