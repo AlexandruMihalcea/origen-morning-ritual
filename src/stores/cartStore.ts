@@ -121,7 +121,8 @@ async function addLineToShopifyCart(cartId: string, item: CartItem) {
   if (userErrors.length > 0) return { success: false, error: formatUserErrors(userErrors, "This item could not be added to the cart.") };
   const lines = data?.data?.cartLinesAdd?.cart?.lines?.edges || [];
   const newLine = lines.find((l: any) => l.node.merchandise.id === item.variantId);
-  return { success: true, lineId: newLine?.node?.id as string | undefined };
+  if (!newLine?.node?.id) return { success: false, error: "Shopify did not keep this item in the cart for checkout." };
+  return { success: true, lineId: newLine.node.id as string };
 }
 
 async function updateShopifyCartLine(cartId: string, lineId: string, quantity: number) {
