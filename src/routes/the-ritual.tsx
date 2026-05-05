@@ -3,16 +3,16 @@ import { Nav } from "../components/Nav";
 import { Footer } from "../components/Footer";
 import { Reveal } from "../components/Reveal";
 import { useLanguageStore } from "@/stores/languageStore";
+import { seoMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/the-ritual")({
-  head: () => ({
-    meta: [
-      { title: "The Ritual — ORIGEN" },
-      { name: "description", content: "Twenty minutes. Three tools. Pressure → Cold → Nourish. The morning ritual that changes everything that follows." },
-      { property: "og:title", content: "The Ritual — ORIGEN" },
-      { property: "og:description", content: "Pressure. Cold. Nourish. Twenty minutes." },
-    ],
-  }),
+  head: () =>
+    seoMeta({
+      title: "The Morning Ritual — 3 Steps to Sovereignty | ORIGEN",
+      description:
+        "Pressure. Cold. Nourish. The complete ORIGEN morning ritual explained — why it works and how to make it yours.",
+      path: "/the-ritual",
+    }),
   component: RitualPage,
 });
 

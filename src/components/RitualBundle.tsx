@@ -75,9 +75,15 @@ export function RitualBundle({ variant = "section" }: { variant?: "section" | "p
       <div className="mx-auto max-w-6xl">
         <Reveal className="text-center max-w-2xl mx-auto">
           <span className="eyebrow">The Complete Ritual</span>
-          <h2 className="serif mt-8 text-4xl md:text-6xl leading-[1.05]">
-            Pressure. Cold. <span className="italic text-primary">Nourish.</span>
-          </h2>
+          {isPage ? (
+            <h1 className="serif mt-8 text-4xl md:text-6xl leading-[1.05]">
+              Pressure. Cold. <span className="italic text-primary">Nourish.</span>
+            </h1>
+          ) : (
+            <h2 className="serif mt-8 text-4xl md:text-6xl leading-[1.05]">
+              Pressure. Cold. <span className="italic text-primary">Nourish.</span>
+            </h2>
+          )}
           <p className="mt-6 text-foreground/75 text-lg leading-[1.7]">
             The full ORIGEN morning ritual — all three steps, one package.
           </p>
@@ -88,7 +94,11 @@ export function RitualBundle({ variant = "section" }: { variant?: "section" | "p
             <Reveal key={p.handle} delay={i * 120}>
               <div className="border border-border/40 bg-card/40 grain h-full flex flex-col">
                 <div className="aspect-[4/5] overflow-hidden bg-card">
-                  <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
+                  <img
+                    src={p.image}
+                    alt={`${p.name} by ORIGEN — Step ${i + 1}, ${p.label}`}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div className="p-6 flex-1 flex flex-col">
                   <div className="eyebrow text-primary">Step 0{i + 1} — {p.label}</div>

@@ -125,7 +125,7 @@ export function ProductPage({ p }: { p: ProductInfo }) {
                     {image && (
                       <img
                         src={image.url}
-                        alt={image.altText || p.name}
+                        alt={image.altText || `${p.name} by ORIGEN — ${p.label}`}
                         className="absolute inset-0 m-auto w-[70%] h-[70%] object-contain z-[5]"
                         style={{ filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.5))" }}
                       />
@@ -212,7 +212,7 @@ export function ProductPage({ p }: { p: ProductInfo }) {
             <Reveal>
               <img
                 src={p.lifestyleImage}
-                alt={p.name}
+                alt={`${p.name} by ORIGEN in use — ${p.label} step of the morning ritual`}
                 className="mt-24 w-full block"
                 style={{ maxHeight: "580px", objectFit: "cover" }}
               />

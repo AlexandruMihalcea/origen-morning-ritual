@@ -31,18 +31,11 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "ORIGEN — Back to basics. Fly higher." },
-      { name: "description", content: "ORIGEN: a twenty-minute morning ritual. Pressure. Cold. Nourish. Three tools that change the baseline of the day." },
       { name: "author", content: "ORIGEN" },
-      { property: "og:title", content: "ORIGEN — Back to basics. Fly higher." },
-      { property: "og:description", content: "ORIGEN: a twenty-minute morning ritual. Pressure. Cold. Nourish. Three tools that change the baseline of the day." },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "ORIGEN" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "ORIGEN — Back to basics. Fly higher." },
-      { name: "twitter:description", content: "ORIGEN: a twenty-minute morning ritual. Pressure. Cold. Nourish. Three tools that change the baseline of the day." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/fwxGouoQNmYMHlGXiHBIz6P70rQ2/social-images/social-1777935570452-ChatGPT_Image_Apr_29,_2026_at_03_35_35_PM.webp" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/fwxGouoQNmYMHlGXiHBIz6P70rQ2/social-images/social-1777935570452-ChatGPT_Image_Apr_29,_2026_at_03_35_35_PM.webp" },
     ],
     links: [
       {

@@ -2,14 +2,15 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { Nav } from '../components/Nav'
 import { Footer } from '../components/Footer'
 import { Reveal } from '../components/Reveal'
+import { seoMeta } from '@/lib/seo'
 
 export const Route = createFileRoute('/refund-policy')({
-  head: () => ({
-    meta: [
-      { title: 'Refund Policy — ORIGEN' },
-      { name: 'description', content: "ORIGEN's returns and refund policy. 30-day returns on unused items." },
-    ],
-  }),
+  head: () =>
+    seoMeta({
+      title: 'Refund & Returns Policy | ORIGEN',
+      description: "ORIGEN's returns and refund policy. 30-day returns on unused items.",
+      path: '/refund-policy',
+    }),
   component: RefundPage,
 })
 
