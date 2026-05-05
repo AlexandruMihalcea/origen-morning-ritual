@@ -4,16 +4,40 @@ import { useLanguageStore } from "@/stores/languageStore";
 import rollerHero from "@/assets/roller-hero.jpg";
 import rollerVideo from "@/assets/roller-video.mp4";
 import rollerLifestyle from "@/assets/roller-lifestyle.jpg";
+import { seoMeta, jsonLdScript, SITE_URL } from "@/lib/seo";
 
 export const Route = createFileRoute("/the-roller")({
-  head: () => ({
-    meta: [
-      { title: "The Roller — ORIGEN" },
-      { name: "description", content: "Cold that sharpens. Jade facial roller for cold therapy, inflammation reduction and natural alertness." },
-      { property: "og:title", content: "The Roller — ORIGEN" },
-      { property: "og:description", content: "Cold that sharpens." },
-    ],
-  }),
+  head: () => {
+    const seo = seoMeta({
+      title: "Jade Facial Roller & Gua Sha Set | Step 2 — Cold | ORIGEN",
+      description:
+        "Cold jade, every morning. Depuff, lift, and awaken the skin with The ORIGEN Roller — natural jade facial roller and gua sha stone. Cruelty-free.",
+      path: "/the-roller",
+      image: rollerHero as string,
+      type: "product",
+    });
+    return {
+      ...seo,
+      scripts: [
+        jsonLdScript({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: "The ORIGEN Roller — Jade Facial Roller & Gua Sha Set",
+          description:
+            "Natural jade facial roller and gua sha stone to depuff, lift, and awaken the skin.",
+          image: `${SITE_URL}${rollerHero as string}`,
+          brand: { "@type": "Brand", name: "ORIGEN" },
+          offers: {
+            "@type": "Offer",
+            price: "34.00",
+            priceCurrency: "GBP",
+            availability: "https://schema.org/InStock",
+            url: `${SITE_URL}/the-roller`,
+          },
+        }),
+      ],
+    };
+  },
   component: RollerPage,
 });
 
