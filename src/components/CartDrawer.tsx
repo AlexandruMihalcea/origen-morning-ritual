@@ -8,7 +8,7 @@ import { useLanguageStore } from "@/stores/languageStore";
 import { useCurrencyStore } from "@/stores/currencyStore";
 
 export function CartDrawer() {
-  const { items, isLoading, isSyncing, isOpen, setOpen, updateQuantity, removeItem, getCheckoutUrl, syncCart } = useCartStore();
+  const { items, cartMessage, isLoading, isSyncing, isOpen, setOpen, updateQuantity, removeItem, getCheckoutUrl, syncCart } = useCartStore();
   const { t } = useLanguageStore();
   const { convert } = useCurrencyStore();
 
@@ -20,7 +20,10 @@ export function CartDrawer() {
     if (isOpen) syncCart();
   }, [isOpen, syncCart]);
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
+    await syncCart();
+    const state = useCartStore.getState();
+    if (state.cartMessage || state.items.length === 0) return;
     const url = getCheckoutUrl();
     if (url) {
       window.open(url, "_blank");
@@ -48,6 +51,11 @@ export function CartDrawer() {
           </SheetDescription>
         </SheetHeader>
         <div className="flex flex-col flex-1 pt-6 min-h-0">
+          {cartMessage && (
+            <div className="mb-5 border border-primary/40 bg-primary/10 px-4 py-3 text-sm leading-relaxed text-foreground/80">
+              {cartMessage}
+            </div>
+          )}
           {items.length === 0 ? (
             <div className="flex-1 flex items-center justify-center text-center">
               <div>
