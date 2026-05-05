@@ -94,7 +94,11 @@ export function RitualBundle({ variant = "section" }: { variant?: "section" | "p
             <Reveal key={p.handle} delay={i * 120}>
               <div className="border border-border/40 bg-card/40 grain h-full flex flex-col">
                 <div className="aspect-[4/5] overflow-hidden bg-card">
-                  <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
+                  <img
+                    src={p.image}
+                    alt={`${p.name} by ORIGEN — Step ${i + 1}, ${p.label}`}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div className="p-6 flex-1 flex flex-col">
                   <div className="eyebrow text-primary">Step 0{i + 1} — {p.label}</div>
