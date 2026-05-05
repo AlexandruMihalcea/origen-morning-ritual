@@ -99,15 +99,15 @@ async function createShopifyCart(item: CartItem) {
   const data = await storefrontApiRequest<any>(CART_CREATE_MUTATION, {
     input: { lines: [{ quantity: item.quantity, merchandiseId: item.variantId }] },
   });
-  if (!data) return null;
+  if (!data) return { error: "Shopify did not return a cart. Please try again." };
   if (data?.data?.cartCreate?.userErrors?.length > 0) {
     console.error("Cart creation failed:", data.data.cartCreate.userErrors);
-    return null;
+    return { error: formatUserErrors(data.data.cartCreate.userErrors, "This item could not be added to the cart.") };
   }
   const cart = data?.data?.cartCreate?.cart;
-  if (!cart?.checkoutUrl) return null;
+  if (!cart?.checkoutUrl) return { error: "Shopify did not return a checkout link. Please try again." };
   const lineId = cart.lines.edges[0]?.node?.id;
-  if (!lineId) return null;
+  if (!lineId) return { error: "Shopify did not add this item to the cart." };
   return { cartId: cart.id as string, checkoutUrl: formatCheckoutUrl(cart.checkoutUrl), lineId: lineId as string };
 }
 
@@ -118,7 +118,7 @@ async function addLineToShopifyCart(cartId: string, item: CartItem) {
   });
   const userErrors = data?.data?.cartLinesAdd?.userErrors || [];
   if (isCartNotFoundError(userErrors)) return { success: false, cartNotFound: true };
-  if (userErrors.length > 0) return { success: false };
+  if (userErrors.length > 0) return { success: false, error: formatUserErrors(userErrors, "This item could not be added to the cart.") };
   const lines = data?.data?.cartLinesAdd?.cart?.lines?.edges || [];
   const newLine = lines.find((l: any) => l.node.merchandise.id === item.variantId);
   return { success: true, lineId: newLine?.node?.id as string | undefined };
@@ -131,7 +131,7 @@ async function updateShopifyCartLine(cartId: string, lineId: string, quantity: n
   });
   const userErrors = data?.data?.cartLinesUpdate?.userErrors || [];
   if (isCartNotFoundError(userErrors)) return { success: false, cartNotFound: true };
-  if (userErrors.length > 0) return { success: false };
+  if (userErrors.length > 0) return { success: false, error: formatUserErrors(userErrors, "This quantity could not be updated.") };
   return { success: true };
 }
 
@@ -139,7 +139,7 @@ async function removeLineFromShopifyCart(cartId: string, lineId: string) {
   const data = await storefrontApiRequest<any>(CART_LINES_REMOVE_MUTATION, { cartId, lineIds: [lineId] });
   const userErrors = data?.data?.cartLinesRemove?.userErrors || [];
   if (isCartNotFoundError(userErrors)) return { success: false, cartNotFound: true };
-  if (userErrors.length > 0) return { success: false };
+  if (userErrors.length > 0) return { success: false, error: formatUserErrors(userErrors, "This item could not be removed.") };
   return { success: true };
 }
 
