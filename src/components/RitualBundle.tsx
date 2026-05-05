@@ -75,9 +75,15 @@ export function RitualBundle({ variant = "section" }: { variant?: "section" | "p
       <div className="mx-auto max-w-6xl">
         <Reveal className="text-center max-w-2xl mx-auto">
           <span className="eyebrow">The Complete Ritual</span>
-          <h2 className="serif mt-8 text-4xl md:text-6xl leading-[1.05]">
-            Pressure. Cold. <span className="italic text-primary">Nourish.</span>
-          </h2>
+          {isPage ? (
+            <h1 className="serif mt-8 text-4xl md:text-6xl leading-[1.05]">
+              Pressure. Cold. <span className="italic text-primary">Nourish.</span>
+            </h1>
+          ) : (
+            <h2 className="serif mt-8 text-4xl md:text-6xl leading-[1.05]">
+              Pressure. Cold. <span className="italic text-primary">Nourish.</span>
+            </h2>
+          )}
           <p className="mt-6 text-foreground/75 text-lg leading-[1.7]">
             The full ORIGEN morning ritual — all three steps, one package.
           </p>
