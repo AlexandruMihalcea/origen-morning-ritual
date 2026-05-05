@@ -163,7 +163,9 @@ export const useCartStore = create<CartStore>()(
         try {
           if (!cartId) {
             const result = await createShopifyCart({ ...item, lineId: null });
-            if ("cartId" in result) {
+            if ("error" in result) {
+              set({ cartMessage: result.error, isOpen: true });
+            } else {
               set({
                 cartId: result.cartId,
                 checkoutUrl: result.checkoutUrl,
@@ -171,8 +173,6 @@ export const useCartStore = create<CartStore>()(
                 isOpen: true,
                 cartMessage: null,
               });
-            } else {
-              set({ cartMessage: result.error, isOpen: true });
             }
           } else if (existing) {
             if (!existing.lineId) return;
@@ -215,8 +215,9 @@ export const useCartStore = create<CartStore>()(
           const result = await updateShopifyCartLine(cartId, item.lineId, quantity);
           if (result.success) {
             const cur = get().items;
-            set({ items: cur.map((i) => (i.variantId === variantId ? { ...i, quantity } : i)) });
+            set({ items: cur.map((i) => (i.variantId === variantId ? { ...i, quantity } : i)), cartMessage: null });
           } else if (result.cartNotFound) clearCart();
+          else set({ cartMessage: result.error ?? "This quantity could not be updated." });
         } finally {
           set({ isLoading: false });
         }
@@ -233,14 +234,15 @@ export const useCartStore = create<CartStore>()(
             const cur = get().items;
             const next = cur.filter((i) => i.variantId !== variantId);
             if (next.length === 0) clearCart();
-            else set({ items: next });
+            else set({ items: next, cartMessage: null });
           } else if (result.cartNotFound) clearCart();
+          else set({ cartMessage: result.error ?? "This item could not be removed." });
         } finally {
           set({ isLoading: false });
         }
       },
 
-      clearCart: () => set({ items: [], cartId: null, checkoutUrl: null }),
+      clearCart: () => set({ items: [], cartId: null, checkoutUrl: null, cartMessage: null }),
       getCheckoutUrl: () => get().checkoutUrl,
 
       syncCart: async () => {
