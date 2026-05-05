@@ -20,7 +20,10 @@ export function CartDrawer() {
     if (isOpen) syncCart();
   }, [isOpen, syncCart]);
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
+    await syncCart();
+    const state = useCartStore.getState();
+    if (state.cartMessage || state.items.length === 0) return;
     const url = getCheckoutUrl();
     if (url) {
       window.open(url, "_blank");
