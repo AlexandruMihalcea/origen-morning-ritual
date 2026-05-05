@@ -3,16 +3,16 @@ import { Nav } from "../components/Nav";
 import { Footer } from "../components/Footer";
 import { Reveal } from "../components/Reveal";
 import { useLanguageStore } from "@/stores/languageStore";
+import { seoMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "About — ORIGEN" },
-      { name: "description", content: "ORIGEN went back to basics. Pressure. Cold. Nourishment. The morning before the noise." },
-      { property: "og:title", content: "About — ORIGEN" },
-      { property: "og:description", content: "Back to basics. Fly higher." },
-    ],
-  }),
+  head: () =>
+    seoMeta({
+      title: "About ORIGEN — Back to Basics. Fly Higher.",
+      description:
+        "ORIGEN is a morning wellness brand built on one belief: the most powerful rituals are the simplest ones. Meet the brand.",
+      path: "/about",
+    }),
   component: AboutPage,
 });
 
