@@ -2,14 +2,15 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { Nav } from '../components/Nav'
 import { Footer } from '../components/Footer'
 import { Reveal } from '../components/Reveal'
+import { seoMeta } from '@/lib/seo'
 
 export const Route = createFileRoute('/terms')({
-  head: () => ({
-    meta: [
-      { title: 'Terms & Conditions — ORIGEN' },
-      { name: 'description', content: 'Terms and Conditions for ORIGEN morning ritual products.' },
-    ],
-  }),
+  head: () =>
+    seoMeta({
+      title: 'Terms & Conditions | ORIGEN',
+      description: 'Terms and Conditions for ORIGEN morning ritual products.',
+      path: '/terms',
+    }),
   component: TermsPage,
 })
 
