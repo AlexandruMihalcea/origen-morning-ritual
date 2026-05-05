@@ -254,6 +254,20 @@ export const useCartStore = create<CartStore>()(
           if (!data) return;
           const cart = data?.data?.cart;
           if (!cart || cart.totalQuantity === 0) clearCart();
+          else {
+            const cartLines = cart.lines?.edges ?? [];
+            const lineIds = new Set(cartLines.map((l: any) => l.node.id));
+            const variantIds = new Set(cartLines.map((l: any) => l.node.merchandise.id));
+            const syncedItems = get().items.filter((i) => (i.lineId ? lineIds.has(i.lineId) : variantIds.has(i.variantId)));
+            const removedItems = syncedItems.length < get().items.length;
+            set({
+              items: syncedItems,
+              checkoutUrl: cart.checkoutUrl ? formatCheckoutUrl(cart.checkoutUrl) : get().checkoutUrl,
+              cartMessage: removedItems
+                ? "Shopify removed one or more items before checkout because they are not currently available for this checkout setup."
+                : get().cartMessage,
+            });
+          }
         } catch (e) {
           console.error("Failed to sync cart:", e);
         } finally {
