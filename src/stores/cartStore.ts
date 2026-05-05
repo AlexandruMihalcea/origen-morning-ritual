@@ -163,7 +163,7 @@ export const useCartStore = create<CartStore>()(
         try {
           if (!cartId) {
             const result = await createShopifyCart({ ...item, lineId: null });
-            if (result) {
+            if ("cartId" in result) {
               set({
                 cartId: result.cartId,
                 checkoutUrl: result.checkoutUrl,
@@ -171,6 +171,8 @@ export const useCartStore = create<CartStore>()(
                 isOpen: true,
                 cartMessage: null,
               });
+            } else {
+              set({ cartMessage: result.error, isOpen: true });
             }
           } else if (existing) {
             if (!existing.lineId) return;
@@ -184,12 +186,14 @@ export const useCartStore = create<CartStore>()(
                 cartMessage: null,
               });
             } else if (result.cartNotFound) clearCart();
+            else set({ cartMessage: result.error ?? "This cart item could not be updated." });
           } else {
             const result = await addLineToShopifyCart(cartId, { ...item, lineId: null });
             if (result.success) {
               const cur = get().items;
               set({ items: [...cur, { ...item, lineId: result.lineId ?? null }], isOpen: true, cartMessage: null });
             } else if (result.cartNotFound) clearCart();
+            else set({ cartMessage: result.error ?? "This item could not be added to the cart.", isOpen: true });
           }
         } catch (e) {
           console.error("Failed to add item:", e);
